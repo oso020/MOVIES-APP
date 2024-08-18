@@ -4,11 +4,7 @@ import 'package:movie_app/theme/theme_app.dart';
 
 void main() {
   runApp(const MyApp());
-  //ziad14
-  //mohamed ali
-  //marammmmm
-  // ziad/maram
-  //mohamed/osman
+
 }
 
 class MyApp extends StatelessWidget {
@@ -23,8 +19,6 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName :(context)=> HomeScreen()
       },
 
-      /// osman
-      /// mohamed 2
 
     );
   }
