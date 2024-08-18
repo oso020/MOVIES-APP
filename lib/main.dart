@@ -5,6 +5,7 @@ import 'package:movie_app/theme/theme_app.dart';
 void main() {
   runApp(const MyApp());
   //mohamed ali
+  //maram
 }
 
 class MyApp extends StatelessWidget {
