@@ -21,8 +21,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
           child: Image.asset(
             "assets/images/test.jpg",
             width: 90.w,
-            height: 170.h,
-
+            height: 180.h,
             fit: BoxFit.fill,
           ),
         ),
@@ -46,13 +45,14 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                 ),
         ),
         Positioned(
-          top: 103.h,
+          top: 93.h,
           child: Container(
             padding: EdgeInsets.all(7),
             decoration: BoxDecoration(
-              color: Color(0xff514F4F),
-borderRadius:BorderRadius.only(bottomRight: Radius.circular(5),bottomLeft: Radius.circular(5))
-            ),
+                color: Color(0xff514F4F),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5))),
             width: 90.w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,9 +81,9 @@ borderRadius:BorderRadius.only(bottomRight: Radius.circular(5),bottomLeft: Radiu
                 Text(
                   "2019  PG-13  2h 7m",
                   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontSize: 8.sp,
-                    color: ColorApp.lightGreyColor,
-                  ),
+                        fontSize: 8.sp,
+                        color: ColorApp.lightGreyColor,
+                      ),
                 ),
               ],
             ),

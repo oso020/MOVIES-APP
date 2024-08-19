@@ -24,34 +24,24 @@ class MovieHome extends StatelessWidget {
                 height: 220.h,
                 fit: BoxFit.fill,
               ),
-              Positioned(
-                left: 170.w,
-                height: 200.h,
-                fit: BoxFit.fill,
-              ),
+
               Positioned(
                 left: 160.w,
                 top: 70.h,
                 child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.play_circle,
-                      color: ColorApp.whiteColor,
-                      size: 70.w,
-      
-                    ),),
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.play_circle,
+                    color: ColorApp.whiteColor,
+                    size: 70.w,
+                  ),
+                ),
               ),
-      
+
               Positioned(top: 100.h, left: 20.w, child: ShowImage()),
-              Positioned(
-                  top: 230.h,
 
-                    ),),
-              ),
-
-              Positioned(top: 120.h, left: 20.w, child: ShowImage()),
               Positioned(
                   top: 210.h,
-
                   left: 160.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,34 +52,28 @@ class MovieHome extends StatelessWidget {
                             .textTheme
                             .titleMedium!
                             .copyWith(fontSize: 15.sp),
-                            .copyWith(fontSize: 12.sp),
                       ),
                       SizedBox(
                         height: 5.h,
                       ),
                       Text(
                         "2019  PG-13  2h 7m",
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              fontSize: 10.sp,
-                              color: ColorApp.lightGreyColor,
-                            ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontSize: 10.sp,
+                                  color: ColorApp.lightGreyColor,
+                                ),
                       ),
                     ],
                   )),
+
               /// center listView
-      
-      
-      
-
-
-
             ],
           ),
           SizedBox(
-            height: 110.h,
+            height: 90.h,
           ),
           NewReleaseListViewAndText(),
-      
           SizedBox(
             height: 30.h,
           ),
