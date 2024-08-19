@@ -21,36 +21,32 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
           child: Image.asset(
             "assets/images/test.jpg",
             width: 100.w,
-            height: 170.h,
+            height: 150.h,
             fit: BoxFit.fill,
           ),
         ),
 
-        Positioned(
-          left: 2.w,
+        GestureDetector(
+          onTap: (){
+            isBooked =!isBooked;
+            setState(() {
 
-          child: GestureDetector(
-            onTap: (){
-              isBooked =!isBooked;
-              setState(() {
-
-              });
-            },
-            child:
-          isBooked==true?
-            Image.asset(
-              "assets/images/bookmark_saved.png",
-              width: 30.w,
-              height: 40.h,
-              fit: BoxFit.fill,
-            )
-            :
-            Image.asset(
-              "assets/images/bookmark.png",
-              width: 30.w,
-              height: 40.h,
-              fit: BoxFit.fill,
-            ),
+            });
+          },
+          child:
+        isBooked==true?
+          Image.asset(
+            "assets/images/bookmark_saved.png",
+            width: 30.w,
+            height: 40.h,
+            fit: BoxFit.fill,
+          )
+          :
+          Image.asset(
+            "assets/images/bookmark.png",
+            width: 30.w,
+            height: 40.h,
+            fit: BoxFit.fill,
           ),
         ),
       ],
