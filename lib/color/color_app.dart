@@ -5,6 +5,7 @@ class ColorApp{
   static const Color lightGreyColor=Color(0xffC6C6C6);
   static const Color mediumGreyColor=Color(0xffC6C6C6);
   static const Color darkGreyColor=Color(0xff121312);
+  static const Color backgroundListViewColorGrey=Color(0xff282A28);
   static const Color whiteColor=Color(0xffffffff);
   static const Color backgroundColor=Color(0xff121312);
 }
