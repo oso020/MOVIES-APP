@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
 import 'package:movie_app/responsive_ui/responsive_class.dart';
+import 'package:movie_app/theme/theme_app.dart';
+
+import 'home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,9 +25,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: MovieDetailsScreen.routeName,
+          initialRoute: HomeScreen.routeName,
+          theme: ThemeApp.theme,
           routes: {
-            // HomeScreen.routeName :(context)=> HomeScreen(),
+            HomeScreen.routeName :(context)=> HomeScreen(),
             MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
           },
 

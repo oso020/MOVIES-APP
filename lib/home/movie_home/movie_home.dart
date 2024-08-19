@@ -61,8 +61,8 @@ class MovieHome extends StatelessWidget {
                         "2019  PG-13  2h 7m",
                         style:
                             Theme.of(context).textTheme.titleMedium!.copyWith(
-                                  fontSize: 10.sp,
-                                  color: ColorApp.greyShade4,
+                                  fontSize: 11.sp,
+                                  color: ColorApp.greyShade3,
                                 ),
                       ),
                     ],
