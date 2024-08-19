@@ -8,10 +8,10 @@ class ThemeApp{
     scaffoldBackgroundColor: ColorApp.backgroundColor,
 
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: ColorApp.darkGreyColor,
-      selectedItemColor: ColorApp.primaryColor,
-      unselectedItemColor: ColorApp.lightGreyColor,
-      type: BottomNavigationBarType.fixed
+          backgroundColor: ColorApp.backgroundColor,
+          selectedItemColor: ColorApp.primaryColor,
+          unselectedItemColor: ColorApp.greyShade6,
+          type: BottomNavigationBarType.fixed
     ),
 
     textTheme: TextTheme(
