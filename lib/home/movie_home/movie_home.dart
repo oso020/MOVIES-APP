@@ -11,72 +11,74 @@ class MovieHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            /// this is the desgin for top of screen
-            Image.asset(
-              "assets/images/test.jpg",
-              width: 500.w,
-              height: 220.h,
-              fit: BoxFit.fill,
-            ),
-            Positioned(
-              left: 170.w,
-              top: 70.h,
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.play_circle,
-                    color: ColorApp.whiteColor,
-                    size: 70.w,
-
-                  ),),
-            ),
-
-            Positioned(top: 100.h, left: 20.w, child: ShowImage()),
-            Positioned(
-                top: 230.h,
-                left: 160.w,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Dora and the lost city of gold",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontSize: 15.sp),
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Text(
-                      "2019  PG-13  2h 7m",
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontSize: 10.sp,
-                            color: ColorApp.lightGreyColor,
-                          ),
-                    ),
-                  ],
-                )),
-            /// center listView
-
-
-
-          ],
-        ),
-        SizedBox(
-          height: 110.h,
-        ),
-        NewReleaseListViewAndText(),
-
-        SizedBox(
-          height: 30.h,
-        ),
-        RecomendedListViewAndText(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              /// this is the desgin for top of screen
+              Image.asset(
+                "assets/images/test.jpg",
+                width: 500.w,
+                height: 220.h,
+                fit: BoxFit.fill,
+              ),
+              Positioned(
+                left: 170.w,
+                top: 70.h,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.play_circle,
+                      color: ColorApp.whiteColor,
+                      size: 70.w,
+      
+                    ),),
+              ),
+      
+              Positioned(top: 100.h, left: 20.w, child: ShowImage()),
+              Positioned(
+                  top: 230.h,
+                  left: 160.w,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Dora and the lost city of gold",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontSize: 15.sp),
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Text(
+                        "2019  PG-13  2h 7m",
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                              fontSize: 10.sp,
+                              color: ColorApp.lightGreyColor,
+                            ),
+                      ),
+                    ],
+                  )),
+              /// center listView
+      
+      
+      
+            ],
+          ),
+          SizedBox(
+            height: 110.h,
+          ),
+          NewReleaseListViewAndText(),
+      
+          SizedBox(
+            height: 30.h,
+          ),
+          RecomendedListViewAndText(),
+        ],
+      ),
     );
   }
 }
