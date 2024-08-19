@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/home/home.dart';
+import 'package:movie_app/responsive_ui/responsive_class.dart';
 import 'package:movie_app/theme/theme_app.dart';
 
 void main() {
@@ -12,15 +14,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeApp.theme,
-      initialRoute: HomeScreen.routeName,
-      routes: {
-        HomeScreen.routeName :(context)=> HomeScreen()
+    var width=ResponsiveClass.width(context);
+    var height=ResponsiveClass.height(context);
+    return ScreenUtilInit(
+      designSize:  Size(width, height),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeApp.theme,
+          initialRoute: HomeScreen.routeName,
+          routes: {
+            HomeScreen.routeName :(context)=> HomeScreen()
+          },
+
+
+        );
       },
-
-
     );
+
+
   }
 }
 
