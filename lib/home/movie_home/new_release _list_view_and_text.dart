@@ -12,7 +12,7 @@ class NewReleaseListViewAndText extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       width: double.infinity,
-      height: 220.h,
+      height: 200.h,
       color: ColorApp.backgroundListViewColorGrey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -21,7 +21,7 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
           child: Image.asset(
             "assets/images/test.jpg",
             width: 100.w,
-            height: 170.h,
+            height: 140.h,
             fit: BoxFit.fill,
           ),
         ),

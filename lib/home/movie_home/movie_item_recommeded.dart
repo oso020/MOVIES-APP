@@ -19,7 +19,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
           child: Image.asset(
             "assets/images/test.jpg",
             width: 100.w,
-            height: 170.h,
+            height: 150.h,
             fit: BoxFit.fill,
           ),
         ),

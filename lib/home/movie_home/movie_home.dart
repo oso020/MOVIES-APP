@@ -21,24 +21,24 @@ class MovieHome extends StatelessWidget {
               Image.asset(
                 "assets/images/test.jpg",
                 width: 500.w,
-                height: 220.h,
+                height: 200.h,
                 fit: BoxFit.fill,
               ),
               Positioned(
-                left: 170.w,
+                left: 160.w,
                 top: 70.h,
                 child: IconButton(
                     onPressed: () {},
                     icon: Icon(Icons.play_circle,
                       color: ColorApp.whiteColor,
                       size: 70.w,
-      
+
                     ),),
               ),
-      
-              Positioned(top: 100.h, left: 20.w, child: ShowImage()),
+
+              Positioned(top: 120.h, left: 20.w, child: ShowImage()),
               Positioned(
-                  top: 230.h,
+                  top: 210.h,
                   left: 160.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +48,7 @@ class MovieHome extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
-                            .copyWith(fontSize: 15.sp),
+                            .copyWith(fontSize: 12.sp),
                       ),
                       SizedBox(
                         height: 5.h,
@@ -63,9 +63,9 @@ class MovieHome extends StatelessWidget {
                     ],
                   )),
               /// center listView
-      
-      
-      
+
+
+
             ],
           ),
           SizedBox(

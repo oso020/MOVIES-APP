@@ -18,8 +18,8 @@ class _ShowImageState extends State<ShowImage> {
           borderRadius: BorderRadius.circular(5),
           child: Image.asset(
             "assets/images/test.jpg",
-            width: 130.w,
-            height: 200.h,
+            width: 125.w,
+            height: 170.h,
             fit: BoxFit.fill,
           ),
         ),
