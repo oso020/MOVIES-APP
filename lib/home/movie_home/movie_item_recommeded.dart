@@ -45,7 +45,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                 ),
         ),
         Positioned(
-          top: 93.h,
+          top: 95.h,
           child: Container(
             padding: EdgeInsets.all(7),
             decoration: BoxDecoration(

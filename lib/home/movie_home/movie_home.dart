@@ -21,7 +21,7 @@ class MovieHome extends StatelessWidget {
               Image.asset(
                 "assets/images/test.jpg",
                 width: 500.w,
-                height: 220.h,
+                height: 200.h,
                 fit: BoxFit.fill,
               ),
 
@@ -51,7 +51,7 @@ class MovieHome extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium!
-                            .copyWith(fontSize: 15.sp),
+                            .copyWith(fontSize: 14.sp),
                       ),
                       SizedBox(
                         height: 5.h,
