@@ -22,6 +22,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
             "assets/images/test.jpg",
             width: 90.w,
             height: 170.h,
+
             fit: BoxFit.fill,
           ),
         ),

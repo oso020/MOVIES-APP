@@ -26,6 +26,11 @@ class MovieHome extends StatelessWidget {
               ),
               Positioned(
                 left: 170.w,
+                height: 200.h,
+                fit: BoxFit.fill,
+              ),
+              Positioned(
+                left: 160.w,
                 top: 70.h,
                 child: IconButton(
                     onPressed: () {},
@@ -39,6 +44,14 @@ class MovieHome extends StatelessWidget {
               Positioned(top: 100.h, left: 20.w, child: ShowImage()),
               Positioned(
                   top: 230.h,
+
+                    ),),
+              ),
+
+              Positioned(top: 120.h, left: 20.w, child: ShowImage()),
+              Positioned(
+                  top: 210.h,
+
                   left: 160.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,6 +62,7 @@ class MovieHome extends StatelessWidget {
                             .textTheme
                             .titleMedium!
                             .copyWith(fontSize: 15.sp),
+                            .copyWith(fontSize: 12.sp),
                       ),
                       SizedBox(
                         height: 5.h,
@@ -66,6 +80,9 @@ class MovieHome extends StatelessWidget {
       
       
       
+
+
+
             ],
           ),
           SizedBox(
