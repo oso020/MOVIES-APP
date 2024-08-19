@@ -14,8 +14,7 @@ class NewReleaseListViewAndText extends StatelessWidget {
       padding: EdgeInsets.all(12),
       width: double.infinity,
       height: 215.h,
-
-      color: ColorApp.backgroundListViewColorGrey,
+      color: ColorApp.greyShade5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

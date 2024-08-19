@@ -62,7 +62,7 @@ class MovieHome extends StatelessWidget {
                         style:
                             Theme.of(context).textTheme.titleMedium!.copyWith(
                                   fontSize: 10.sp,
-                                  color: ColorApp.lightGreyColor,
+                                  color: ColorApp.greyShade4,
                                 ),
                       ),
                     ],

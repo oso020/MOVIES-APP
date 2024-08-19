@@ -86,7 +86,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                     "2019  PG-13  2h 7m",
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           fontSize: 8.sp,
-                          color: ColorApp.lightGreyColor,
+                          color: ColorApp.greyShade2,
                         ),
                   ),
                 ],

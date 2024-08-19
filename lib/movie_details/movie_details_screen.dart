@@ -30,64 +30,64 @@ class MovieDetailsScreen extends StatelessWidget {
         ),
         backgroundColor: ColorApp.backgroundColor,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Stack(
-            children: [
-              Image.asset(
-                "assets/images/test.jpg",
-                width: double.infinity,
-                height: 200.h,
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.play_circle, // Replace with your desired icon
-                    color: Colors.white, // Change the color as needed
-                    size: 60.0, // Adjust the size as needed
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Stack(
+              children: [
+                Image.asset(
+                  "assets/images/test.jpg",
+                  width: double.infinity,
+                  height: 200.h,
+                  fit: BoxFit.cover,
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Icon(
+                      Icons.play_circle, // Replace with your desired icon
+                      color: Colors.white, // Change the color as needed
+                      size: 60.0, // Adjust the size as needed
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          //container of movie info section:
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Dora and the Lost City of Gold",
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                        color: ColorApp.whiteColor,
-                      ),
-                ),
-                SizedBox(height: 4.h),
-                Text(
-                  "2019 PG-13 2h 7m",
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 10,
-                        color: ColorApp.greyShade2,
-                      ),
-                ),
-                SizedBox(height: 16.h),
-                MovieInfoWidget(),
               ],
             ),
-          ),
-          Expanded(
+            //container of movie info section:
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dora and the Lost City of Gold",
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 18,
+                          color: ColorApp.whiteColor,
+                        ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Text(
+                    "2019 PG-13 2h 7m",
+                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 10,
+                          color: ColorApp.greyShade2,
+                        ),
+                  ),
+                  SizedBox(height: 16.h),
+                  MovieInfoWidget(),
+                ],
+              ),
+            ),
             //container of  more like this section:
-            child: Container(
+            Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               color: ColorApp.greyShade5,
               child: Column(
@@ -101,7 +101,9 @@ class MovieDetailsScreen extends StatelessWidget {
                         ),
                   ),
                   SizedBox(height: 10.h),
-                  Expanded(
+                  SizedBox(
+                    height: 200.h,
+                    // Specify a height to ensure ListView is constrained
                     child: ListView.builder(
                       itemCount: 10,
                       scrollDirection: Axis.horizontal,
@@ -109,12 +111,12 @@ class MovieDetailsScreen extends StatelessWidget {
                         return MoreLikeThisItem();
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

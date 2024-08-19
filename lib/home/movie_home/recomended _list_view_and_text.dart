@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
 import 'package:movie_app/home/movie_home/movie_item_recommeded.dart';
 
-import 'movie_item_new_release.dart';
-
 class RecomendedListViewAndText extends StatelessWidget {
   const RecomendedListViewAndText({super.key});
 
@@ -15,7 +13,7 @@ class RecomendedListViewAndText extends StatelessWidget {
       padding: EdgeInsets.all(12),
       width: double.infinity,
       height: 225.h,
-      color: ColorApp.backgroundListViewColorGrey,
+      color: ColorApp.greyShade5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
