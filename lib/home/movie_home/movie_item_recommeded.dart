@@ -21,7 +21,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
           Image.asset(
             "assets/images/test.jpg",
             width: 90.w,
-            height: 180.h,
+            height: 200.h,
             fit: BoxFit.fill,
           ),
           GestureDetector(
@@ -44,14 +44,19 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                   ),
           ),
           Positioned(
-            top: 95.h,
+            top: 110.h,
             child: Container(
               padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
+                boxShadow:[
+
+                ] ,
                   color: Color(0xff514F4F),
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5))),
+                      bottomLeft: Radius.circular(5)),
+
+              ),
               width: 90.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -13,7 +13,7 @@ class RecomendedListViewAndText extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       width: double.infinity,
-      height: 210.h,
+      height: 225.h,
       color: ColorApp.backgroundListViewColorGrey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
