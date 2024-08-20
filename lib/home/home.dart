@@ -17,42 +17,44 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectIndex,
-        onTap: (index) {
-          selectIndex = index;
-          setState(() {});
-        },
-        items: const [
-          BottomNavigationBarItem(
-            label: "Home",
-            icon: ImageIcon(AssetImage(
-              "assets/images/home_icon.png",
-            )),
-          ),
-          BottomNavigationBarItem(
-            label: "Search",
-            icon: ImageIcon(AssetImage(
-              "assets/images/search_icon.png",
-            )),
-          ),
-          BottomNavigationBarItem(
-            label: "Browse",
-            icon: ImageIcon(AssetImage(
-              "assets/images/browse_icon.png",
-            )),
-          ),
-          BottomNavigationBarItem(
-            label: "WatchList",
-            icon: ImageIcon(AssetImage(
-              "assets/images/watchlist_icon.png",
-            )),
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+      
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: selectIndex,
+          onTap: (index) {
+            selectIndex = index;
+            setState(() {});
+          },
+          items: const [
+            BottomNavigationBarItem(
+              label: "Home",
+              icon: ImageIcon(AssetImage(
+                "assets/images/home_icon.png",
+              )),
+            ),
+            BottomNavigationBarItem(
+              label: "Search",
+              icon: ImageIcon(AssetImage(
+                "assets/images/search_icon.png",
+              )),
+            ),
+            BottomNavigationBarItem(
+              label: "Browse",
+              icon: ImageIcon(AssetImage(
+                "assets/images/browse_icon.png",
+              )),
+            ),
+            BottomNavigationBarItem(
+              label: "WatchList",
+              icon: ImageIcon(AssetImage(
+                "assets/images/watchlist_icon.png",
+              )),
+            ),
+          ],
+        ),
+        body: listWidgets[selectIndex],
       ),
-      body: listWidgets[selectIndex],
     );
   }
   List<Widget>listWidgets=[
