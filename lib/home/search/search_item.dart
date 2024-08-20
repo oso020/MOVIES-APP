@@ -13,6 +13,7 @@ class SearchItem extends StatelessWidget {
               Image.asset('assets/images/category_image.png'),
               SizedBox(width: 10.w,),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Title',
