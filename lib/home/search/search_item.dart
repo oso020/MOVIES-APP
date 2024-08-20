@@ -10,7 +10,16 @@ class SearchItem extends StatelessWidget {
         Container(
           child: Row(
             children: [
-              Image.asset('assets/images/category_image.png'),
+              SizedBox(
+                width: 10.w,
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset('assets/images/category_image.png',
+                width: 160.w,
+                height: 100.h,
+                fit: BoxFit.fill,),
+              ),
               SizedBox(width: 10.w,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,14 +33,14 @@ class SearchItem extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!
-                        .copyWith(fontSize: 13),
+                        .copyWith(fontSize: 13.sp),
                   ),
                   Text(
                     'Actors',
                     style: Theme.of(context)
                         .textTheme
                         .titleSmall!
-                        .copyWith(fontSize: 13,),
+                        .copyWith(fontSize: 13.sp,),
                   ),
                 ],
               )

@@ -17,13 +17,13 @@ class SearchScreen extends StatelessWidget {
           children: [
             TextField(
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                fontSize: 14
+                fontSize: 14.sp
               ),
               autofocus: true,
               decoration: InputDecoration(
                 hintText: 'Search',
                 hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      fontSize: 14,
+                      fontSize: 14.sp,
                       color: ColorApp.greyShade2,
                     ),
                 enabledBorder: OutlineInputBorder(

@@ -17,7 +17,7 @@ class BrowesScreen extends StatelessWidget {
           children: [
             Text('Browse Category',
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              fontSize: 22,
+              fontSize: 22.sp,
               color: ColorApp.whiteColor
             ),),
             SizedBox(
@@ -27,14 +27,11 @@ class BrowesScreen extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 30,
-                  mainAxisSpacing: 30
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 10
                 ),
                 itemBuilder: (context , index){
-                  return InkWell(
-                    onTap: (){},
-                    child: CategoryItem(category: categoriesList[index]),
-                  );
+                  return CategoryItem(category: categoriesList[index]);
                 },
                 itemCount: 12),
             )

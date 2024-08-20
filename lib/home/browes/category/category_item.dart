@@ -11,18 +11,21 @@ class CategoryItem extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Image.asset(
-          category.imagePath,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.fill,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset(
+            category.imagePath,
+            width: double.infinity,
+            height: 140.h,
+            fit: BoxFit.fill,
+          ),
         ),
         Text(
           category.name,
           style: Theme.of(context)
               .textTheme
               .titleMedium!
-              .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+              .copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600),
         )
       ],
     );
