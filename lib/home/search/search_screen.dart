@@ -16,57 +16,48 @@ class SearchScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                fontSize: 14
+              ),
               autofocus: true,
               decoration: InputDecoration(
                 hintText: 'Search',
-                hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  fontSize: 14,
-                  color: ColorApp.greyShade2,
-                ),
+                hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontSize: 14,
+                      color: ColorApp.greyShade2,
+                    ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: ColorApp.greyShade2),
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                focusedBorder:OutlineInputBorder(
                     borderSide: BorderSide(color: ColorApp.greyShade2),
-                    borderRadius: BorderRadius.circular(30)
-                ),
+                    borderRadius: BorderRadius.circular(30)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: ColorApp.greyShade2),
+                    borderRadius: BorderRadius.circular(30)),
                 fillColor: ColorApp.greyShade3,
                 filled: true,
-                prefixIcon: Icon(Icons.search,color:ColorApp.whiteColor ,),
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: ColorApp.whiteColor,
+                ),
               ),
             ),
-            SizedBox(height: 20.h,),
+            SizedBox(
+              height: 20.h,
+            ),
             SearchItem(),
+            SizedBox(
+              height: 150.h,
+            ),
+            Image.asset('assets/images/movie_icon.png'),
+            Text(
+              'No Movies Found',
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontSize: 13,
+                    color: ColorApp.greyShade4,
+                  ),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-/*
-InkWell(
-onTap: (){
-showSearch(context: context, delegate: Search());
-},
-child: Container(
-padding: EdgeInsets.all(8),
-height: 50.h,
-decoration: BoxDecoration(
-color:  ColorApp.greyShade3,
-borderRadius: BorderRadius.circular(30),
-),
-child: Row(
-children: [
-Icon(Icons.search, color: ColorApp.whiteColor,),
-SizedBox(width: 10.w,),
-Text('Search',style: Theme.of(context).textTheme.titleMedium!.copyWith(
-fontSize: 14,
-color: ColorApp.greyShade2,),)
-],
-),
-),
-),
-*/
-

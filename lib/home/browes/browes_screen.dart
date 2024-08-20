@@ -16,7 +16,7 @@ class BrowesScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Browse Category',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
               fontSize: 22,
               color: ColorApp.whiteColor
             ),),

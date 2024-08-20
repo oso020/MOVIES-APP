@@ -31,12 +31,7 @@ class Search extends SearchDelegate{
   Widget buildSuggestions(BuildContext context) {
     return Column(
       children: [
-        Image.asset('assets/images/movie_icon.png'),
-        Text('No Movies Found',
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-            fontSize: 13,
-            color: ColorApp.greyShade4,
-          ),),
+
       ],
     );
   }
