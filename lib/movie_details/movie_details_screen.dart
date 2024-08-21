@@ -11,7 +11,9 @@ class MovieDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.backgroundColor,
+
       appBar: AppBar(
+        foregroundColor: ColorApp.whiteColor,
         title: Text(
           "Dora and the Lost City of Gold",
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -21,13 +23,7 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: ColorApp.whiteColor,
-          ),
-          onPressed: () {},
-        ),
+
         backgroundColor: ColorApp.backgroundColor,
       ),
       body: SingleChildScrollView(
@@ -52,7 +48,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     child: Icon(
                       Icons.play_circle, // Replace with your desired icon
                       color: Colors.white, // Change the color as needed
-                      size: 60.0, // Adjust the size as needed
+                      size: 70.sp, // Adjust the size as needed
                     ),
                   ),
                 ),

@@ -30,7 +30,7 @@ class SliderItem extends StatelessWidget {
               icon: Icon(
                 Icons.play_circle,
                 color: ColorApp.whiteColor,
-                size: 70.w,
+                size: 70.sp,
               ),
             ),
           ),
