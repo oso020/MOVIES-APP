@@ -17,7 +17,7 @@ class MovieHome extends StatelessWidget {
 
 
           SizedBox(
-            height: 25.h,
+            height: 10.h,
           ),
           NewReleaseListViewAndText(),
           SizedBox(
