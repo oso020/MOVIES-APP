@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/home/browse/discover_screen.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
 import 'package:movie_app/responsive_ui/responsive_class.dart';
 import 'package:movie_app/theme/theme_app.dart';
@@ -35,10 +36,9 @@ class MyApp extends StatelessWidget {
           theme: ThemeApp.theme,
           routes: {
             HomeScreen.routeName :(context)=> HomeScreen(),
-            MovieDetailsScreen.routeName: (context) => MovieDetailsScreen()
+            MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
+            DiscoverScreen.routeName: (context) => DiscoverScreen()
           },
-
-
         );
       },
     );
