@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
 
+
+import '../../component_widgets/network_image_custom.dart';
+import '../../model/Popular.dart';
+
 class ShowImage extends StatefulWidget {
-  const ShowImage({super.key});
+  final ResultsPopular results;
+  const ShowImage({super.key, required this.results});
 
   @override
   State<ShowImage> createState() => _ShowImageState();
@@ -20,16 +25,29 @@ class _ShowImageState extends State<ShowImage> {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: Image.asset(
-              "assets/images/test.jpg",
-              width: 125.w,
-              height: 170.h,
-              fit: BoxFit.fill,
+            borderRadius: BorderRadius.circular(10),
+            child:
+
+            NetworkImageCustom(
+              image: widget.results.posterPath!,
+              width: 120.w,
+              height: 180.h,
             ),
+
+            // CachedNetworkImage(
+            //   imageUrl: "${ApiConstant.imageBaseUrl}${widget.results.posterPath}",
+            //   width: 120.w,
+            //   height: 180.h,
+            //   fit: BoxFit.fill,
+            //   placeholder: (context, url) => Center(child: CircularProgressIndicator(
+            //     color: ColorApp.primaryColor,
+            //   )),
+            //   errorWidget: (context, url, error) => Icon(Icons.error),
+            // ),
+
           ),
           Positioned(
-            left: 2.w,
+
             child: GestureDetector(
               onTap: () {
                 isBooked = !isBooked;

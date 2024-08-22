@@ -1,9 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/component_widgets/network_image_custom.dart';
+import 'package:movie_app/model/NewReleases.dart';
 
 class MovieItemNewRelease extends StatefulWidget {
-  const MovieItemNewRelease({super.key});
+   final ResultsNewReleases  resultsNewReleases;
+   MovieItemNewRelease({super.key, required this.resultsNewReleases});
 
   @override
   State<MovieItemNewRelease> createState() => _MovieItemNewReleaseState();
@@ -18,12 +21,12 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(5),
-          child: Image.asset(
-            "assets/images/test.jpg",
-            width: 100.w,
-            height: 150.h,
-            fit: BoxFit.fill,
-          ),
+          child:
+          NetworkImageCustom(
+          image: "${widget.resultsNewReleases.posterPath!}",
+    width: 100.w,
+    height: 150.h,),
+
         ),
 
         GestureDetector(

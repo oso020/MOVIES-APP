@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
+import 'package:movie_app/component_widgets/network_image_custom.dart';
+
+import '../../model/Recomended.dart';
 
 class MovieItemRecommeded extends StatefulWidget {
-  const MovieItemRecommeded({super.key});
+  final ResultsRecomended resultsRecomended;
+  const MovieItemRecommeded({super.key, required this.resultsRecomended});
 
   @override
   State<MovieItemRecommeded> createState() => _MovieItemRecommededState();
@@ -15,14 +19,12 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
-
       child: Stack(
         children: [
-          Image.asset(
-            "assets/images/test.jpg",
+          NetworkImageCustom(
+            image: widget.resultsRecomended.posterPath!,
             width: 90.w,
             height: 200.h,
-            fit: BoxFit.fill,
           ),
           GestureDetector(
             onTap: () {
@@ -44,18 +46,16 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                   ),
           ),
           Positioned(
-            top: 110.h,
+            top: 90.h,
             child: Container(
-              padding: EdgeInsets.all(7),
-              decoration: BoxDecoration(
-                boxShadow:[
-
-                ] ,
-                  color: Color(0xff514F4F),
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5)),
-
+              height: 90.h,
+              padding: const EdgeInsets.all(7),
+              decoration: const BoxDecoration(
+                boxShadow: [],
+                color: Color(0xff514F4F),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5)),
               ),
               width: 90.w,
               child: Column(
@@ -73,19 +73,22 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                         width: 3.w,
                       ),
                       Text(
-                        "7.7",
+                        widget.resultsRecomended.voteAverage.toString(),
                         style: Theme.of(context).textTheme.titleMedium,
                       )
                     ],
                   ),
                   Text(
-                    "Deadpool 2",
-                    style: Theme.of(context).textTheme.titleMedium,
+                    widget.resultsRecomended.originalTitle!,
+                    maxLines: 3,
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontSize: 9.sp
+                    ),
                   ),
                   Text(
-                    "2019  PG-13  2h 7m",
+                    widget.resultsRecomended.releaseDate!,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontSize: 8.sp,
+                          fontSize: 9.sp,
                           color: ColorApp.greyShade2,
                         ),
                   ),
