@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
 
-import '../../api_service/osman/api_constant.dart';
-import '../../color/color_app.dart';
+
+import '../../component_widgets/network_image_custom.dart';
 import '../../model/Popular.dart';
 
 class ShowImage extends StatefulWidget {
-  final Results results;
+  final ResultsPopular results;
   const ShowImage({super.key, required this.results});
 
   @override
@@ -28,16 +27,23 @@ class _ShowImageState extends State<ShowImage> {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child:
-            CachedNetworkImage(
-              imageUrl: "${ApiConstant.imageBaseUrl}${widget.results.posterPath}",
+
+            NetworkImageCustom(
+              image: widget.results.posterPath!,
               width: 120.w,
               height: 180.h,
-              fit: BoxFit.fill,
-              placeholder: (context, url) => Center(child: CircularProgressIndicator(
-                color: ColorApp.primaryColor,
-              )),
-              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
+
+            // CachedNetworkImage(
+            //   imageUrl: "${ApiConstant.imageBaseUrl}${widget.results.posterPath}",
+            //   width: 120.w,
+            //   height: 180.h,
+            //   fit: BoxFit.fill,
+            //   placeholder: (context, url) => Center(child: CircularProgressIndicator(
+            //     color: ColorApp.primaryColor,
+            //   )),
+            //   errorWidget: (context, url, error) => Icon(Icons.error),
+            // ),
 
           ),
           Positioned(

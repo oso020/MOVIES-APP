@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
+import 'package:movie_app/home/movie_home/cubit/popular/movie_home_view_model_popular.dart';
 
 import 'package:movie_app/home/movie_home/slider_item.dart';
 
-import 'cubit_popular/movie_home_states.dart';
-import 'cubit_popular/movie_home_view_model.dart';
+import 'cubit/popular/movie_home_states_popular.dart';
+
+
 
 class SliderList extends StatelessWidget {
   SliderList({super.key});
-  MovieHomeViewModel movieHomeViewModel = MovieHomeViewModel();
+  MovieHomeViewModelPopular movieHomeViewModel = MovieHomeViewModelPopular();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => movieHomeViewModel..getPopularData(),
-      child: BlocBuilder<MovieHomeViewModel, MovieHomeStates>(
+      child: BlocBuilder<MovieHomeViewModelPopular, MovieHomeStatesPopular>(
         builder: (context, state) {
-          if (state is MovieHomeSuccess) {
+          if (state is MovieHomeSuccessPopular) {
             return CarouselSlider.builder(
               options: CarouselOptions(
                 height: 300.h,
@@ -41,28 +43,33 @@ class SliderList extends StatelessWidget {
                 results: state.results![itemIndex],
               ),
             );
-          }
-          else if (state is MovieHomeError) {
-            return Column(
-              children: [
-                Text(
-                  state.errorMessage!,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium!
-                      .copyWith(fontSize: 14.sp),
-                ),
-              ],
+          } else if (state is MovieHomeErrorPopular) {
+            return SizedBox(
+              height: 250.h,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    state.errorMessage!,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium!
+                        .copyWith(fontSize: 14.sp),
+                  ),
+                ],
+              ),
             );
-          }else{
-            return Column(
-              children: [
-                const Center(
-                  child: CircularProgressIndicator(
+          } else {
+            return const SizedBox(
+              height: 250,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
                     color: ColorApp.primaryColor,
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           }
         },

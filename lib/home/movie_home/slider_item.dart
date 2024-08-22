@@ -1,14 +1,13 @@
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/api_service/osman/api_constant.dart';
 import 'package:movie_app/color/color_app.dart';
+import 'package:movie_app/component_widgets/network_image_custom.dart';
 import 'package:movie_app/home/movie_home/show_image_with_icon_widget.dart';
 import 'package:movie_app/model/Popular.dart';
 
 class SliderItem extends StatelessWidget {
-  final Results results;
+  final ResultsPopular results;
   const SliderItem({super.key, required this.results});
 
   @override
@@ -19,16 +18,22 @@ class SliderItem extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           /// this is the desgin for top of screen
-           CachedNetworkImage(
-                  imageUrl: "${ApiConstant.imageBaseUrl}${results.backdropPath}",
-             width: double.infinity,
-             height: 220.h,
-             fit: BoxFit.fill,
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator(
-                    color: ColorApp.primaryColor,
-                  )),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-               ),
+          NetworkImageCustom(
+            image: results.backdropPath!,
+            width: double.infinity,
+            height: 220.h,
+          ),
+
+           // CachedNetworkImage(
+           //        imageUrl: "${ApiConstant.imageBaseUrl}${results.backdropPath}",
+           //   width: double.infinity,
+           //   height: 220.h,
+           //   fit: BoxFit.fill,
+           //        placeholder: (context, url) => const Center(child: CircularProgressIndicator(
+           //          color: ColorApp.primaryColor,
+           //        )),
+           //        errorWidget: (context, url, error) => const Icon(Icons.error),
+           //     ),
 
 
           Positioned(
@@ -75,7 +80,6 @@ class SliderItem extends StatelessWidget {
                 ],
               )),
 
-          /// center listView
         ],
       ),
     );
