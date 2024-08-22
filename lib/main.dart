@@ -1,9 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/home/home.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/home/browse/discover_screen.dart';
+import 'package:movie_app/movie_details/movie_details_screen.dart';
+import 'package:movie_app/responsive_ui/responsive_class.dart';
 import 'package:movie_app/theme/theme_app.dart';
 
-void main() {
+import 'firebase_options.dart';
+import 'home/home.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -11,14 +23,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeApp.theme,
-      initialRoute: HomeScreen.routeName,
-      routes: {
-        HomeScreen.routeName :(context)=> HomeScreen()
+    var width=ResponsiveClass.width(context);
+    var height=ResponsiveClass.height(context);
+    return ScreenUtilInit(
+      designSize:  Size(width, height),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: HomeScreen.routeName,
+          theme: ThemeApp.theme,
+          routes: {
+            HomeScreen.routeName :(context)=> HomeScreen(),
+            MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
+            DiscoverScreen.routeName: (context) => DiscoverScreen()
+          },
+        );
       },
-
     );
+
+
   }
 }
 
