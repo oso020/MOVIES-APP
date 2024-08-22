@@ -80,6 +80,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                   ),
                   Text(
                     widget.resultsRecomended.originalTitle!,
+                    maxLines: 3,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       fontSize: 9.sp
                     ),
