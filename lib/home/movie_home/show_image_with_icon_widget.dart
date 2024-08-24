@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/firebase_utils.dart';
+import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
-
 
 import '../../component_widgets/network_image_custom.dart';
 import '../../model/Popular.dart';
@@ -20,15 +21,14 @@ class _ShowImageState extends State<ShowImage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, MovieDetailsScreen.routeName,arguments: widget.results.id);
+        Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+            arguments: widget.results.id);
       },
       child: Stack(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child:
-
-            NetworkImageCustom(
+            child: NetworkImageCustom(
               image: widget.results.posterPath!,
               width: 120.w,
               height: 180.h,
@@ -44,14 +44,17 @@ class _ShowImageState extends State<ShowImage> {
             //   )),
             //   errorWidget: (context, url, error) => Icon(Icons.error),
             // ),
-
           ),
           Positioned(
-
             child: GestureDetector(
               onTap: () {
-                isBooked = !isBooked;
-                setState(() {});
+
+                FirebaseUtils.addMovieToFireStore(Movie(
+                  id: widget.results.id.toString(),
+                    title: widget.results.originalTitle ?? "",
+                    imageUrl: widget.results.posterPath ?? "",
+                    dateTime: widget.results.releaseDate));
+
               },
               child: isBooked == true
                   ? Image.asset(

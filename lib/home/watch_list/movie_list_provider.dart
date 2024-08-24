@@ -18,7 +18,7 @@ class MovieListProvider extends ChangeNotifier{
   void getAllTasksFromFireStore(Movie movie) async{
 
     /// to get : collection => Documents => Data
-    QuerySnapshot<Movie> querySnapshot = await FirebaseUtils.getMoviesCollection(movie).get();
+    QuerySnapshot<Movie> querySnapshot = await FirebaseUtils.getMoviesCollection().get();
     /// to convert :
     /// List<QueryDocumentSnapshot<Movie> => List<Movie>
     moviesList = querySnapshot.docs.map((doc){
