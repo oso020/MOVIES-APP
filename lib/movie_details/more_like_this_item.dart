@@ -4,95 +4,134 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../color/color_app.dart';
 
 class MoreLikeThisItem extends StatelessWidget {
+  int movieId;
+  String title;
+  String rate;
+  String runTime;
+  String imagePath;
+  Function(int movieId) onMovieClicked;
+
+  MoreLikeThisItem(
+      {required this.movieId,
+      required this.title,
+      required this.rate,
+      required this.runTime,
+      required this.imagePath,
+      required this.onMovieClicked});
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return InkWell(
+      onTap: () {
+        // print(movieId);
+        onMovieClicked(movieId);
+      },
+      child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Container(
+          constraints: BoxConstraints(
+            maxWidth: 97.w,
+          ),
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            color: Color(0xff514F4F),
+            color: ColorApp.greyShade3,
             borderRadius: BorderRadius.circular(5),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.3), // Shadow color
-                spreadRadius: 1, // Spread radius
-                blurRadius: 5, // Blur radius for soft shadow
-                offset: Offset(0, 3), // Position of the shadow (x, y)
+                color: Colors.black.withOpacity(0.3),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(0, 3),
               ),
             ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //container of the image
+              // Container for the image
               Container(
                 width: 97.w,
                 height: 123.h,
                 child: Stack(
                   children: [
-                    Image.asset(
-                      "assets/images/test.jpg",
+                    Image.network(
+                      "https://image.tmdb.org/t/p/w500/$imagePath",
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.fill,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          "assets/images/movie_icon.png",
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.fill,
+                        );
+                      },
                     ),
                     InkWell(
                       onTap: () {
-                        // Change image or handle the bookmark action
+                        // Handle the bookmark action
                       },
                       child: Image.asset("assets/images/bookmark.png"),
                     ),
                   ],
                 ),
               ),
-
-              //container of movie info
-              Container(
-                padding: EdgeInsets.all(5),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //rating row
-                    Row(
-                      children: [
-                        Image.asset(
-                          "assets/images/star.png",
-                          width: 10.w,
-                          height: 10.h,
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Text("7.7",
+              // Container for movie info
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Rating row
+                      Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/star.png",
+                            width: 10.w,
+                            height: 10.h,
+                          ),
+                          SizedBox(width: 5.w),
+                          Text(
+                            rate,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                    fontSize: 10, color: ColorApp.whiteColor))
-                      ],
-                    ),
-                    // movie name
-                    Text(
-                      "Deadpool2",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontSize: 10, color: ColorApp.whiteColor),
-                    ),
-                    // movie time
-                    Text(
-                      "2019 R 1h 59m",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall!
-                          .copyWith(fontSize: 8, color: ColorApp.greyShade2),
-                    )
-                  ],
+                                    fontSize: 10, color: ColorApp.whiteColor),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      // Movie title
+                      Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontSize: 10, color: ColorApp.whiteColor),
+                      ),
+                      // Movie runtime
+                      Text(
+                        runTime,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(fontSize: 8, color: ColorApp.greyShade2),
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
