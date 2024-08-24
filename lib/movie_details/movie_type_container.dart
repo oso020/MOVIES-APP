@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../color/color_app.dart';
+
 class MovieTypeContainer extends StatelessWidget {
   String type;
 
@@ -10,21 +12,23 @@ class MovieTypeContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 65.w,
-      height: 25.h,
+      height: 30.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: Color(0xff514F4F), width: 1),
+        border: Border.all(color: ColorApp.greyShade3, width: 1),
       ),
       child: Center(
-        child: Text(
-          type,
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall!
-              .copyWith(fontSize: 10, color: Color(0xff514F4F)),
+        child: Padding(
+          padding: EdgeInsets.all(2),
+          child: Text(
+            type,
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall!
+                .copyWith(fontSize: 8, color: Color(0xff514F4F)),
+          ),
         ),
       ),
-      // color: Color(0xff514F4F)
     );
   }
 }

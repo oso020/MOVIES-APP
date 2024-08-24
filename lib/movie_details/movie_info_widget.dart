@@ -5,7 +5,25 @@ import '../color/color_app.dart';
 import 'movie_type_container.dart';
 
 class MovieInfoWidget extends StatelessWidget {
-  const MovieInfoWidget({super.key});
+  String overview;
+  String rating;
+  List<String> genres;
+  String imagePath;
+
+  MovieInfoWidget(
+      {required this.overview,
+      required this.rating,
+      required this.genres,
+      required this.imagePath});
+
+  getGenresList() {
+    List<MovieTypeContainer> genresList = [];
+
+    for (int i = 0; i < genres.length; i++) {
+      genresList.add(MovieTypeContainer(type: genres[i]));
+    }
+    return genresList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +32,22 @@ class MovieInfoWidget extends StatelessWidget {
       children: [
         Stack(
           children: [
-            Image.asset(
-              "assets/images/test.jpg",
+            Image.network(
+              "https://image.tmdb.org/t/p/w500/$imagePath",
               width: 129.w,
               height: 199.h,
               fit: BoxFit.fill,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  "assets/images/movie_icon.png",
+                  width: 129.w,
+                  height: 199.h,
+                  fit: BoxFit.fill,
+                );
+              },
             ),
             InkWell(
               onTap: () {
-                // Change image or handle the bookmark action
               },
               child: Image.asset("assets/images/bookmark.png"),
             ),
@@ -33,22 +58,18 @@ class MovieInfoWidget extends StatelessWidget {
           child: Column(
             children: [
               //movie types
-              Wrap(
-                spacing: 5.0,
-                runSpacing: 8.0,
-                children: [
-                  MovieTypeContainer(type: "Action"),
-                  MovieTypeContainer(type: "Action"),
-                  MovieTypeContainer(type: "Action"),
-                  MovieTypeContainer(type: "Action"),
-                ],
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Wrap(
+                    spacing: 5.0, runSpacing: 8.0, children: getGenresList()),
               ),
               SizedBox(
                 height: 20,
               ),
               //movie description
               Text(
-                "Having spent most of her life exploring the jungle, nothing could prepare Dora for her most dangerous adventure yet — high school. ",
+                overview,
+                overflow: TextOverflow.ellipsis,
                 maxLines: 4,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                       color: ColorApp.greyShade2,
@@ -64,7 +85,7 @@ class MovieInfoWidget extends StatelessWidget {
                   Image.asset("assets/images/star.png"),
                   SizedBox(width: 15.w),
                   Text(
-                    "7.7",
+                    rating,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           fontSize: 19,
                           color: Colors.white,
