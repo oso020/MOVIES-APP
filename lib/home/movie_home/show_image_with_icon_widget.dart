@@ -18,9 +18,9 @@ class _ShowImageState extends State<ShowImage> {
   bool isBooked = false;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, MovieDetailsScreen.routeName);
+        Navigator.pushNamed(context, MovieDetailsScreen.routeName,arguments: widget.results.id);
       },
       child: Stack(
         children: [
