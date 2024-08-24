@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
 
-import '../api_service/osman/api_constant.dart';
+import '../api_service/osman/api_constant_osman.dart';
 
 class NetworkImageCustom extends StatelessWidget {
   final String image;

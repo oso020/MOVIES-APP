@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:movie_app/api_service/osman/api_constant.dart';
+import 'package:movie_app/api_service/osman/api_constant_osman.dart';
 import 'package:http/http.dart'as http;
 import 'package:movie_app/model/Popular.dart';
 

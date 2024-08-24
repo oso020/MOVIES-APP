@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/home/browes/browes_screen.dart';
+import 'package:movie_app/home/browse/browes_screen.dart';
 import 'package:movie_app/home/movie_home/movie_home.dart';
 import 'package:movie_app/home/search/search_screen.dart';
 import 'package:movie_app/home/watch_list/watch_list_screen.dart';

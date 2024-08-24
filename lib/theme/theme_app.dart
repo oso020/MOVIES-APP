@@ -6,7 +6,8 @@ class ThemeApp {
   static final ThemeData theme = ThemeData(
       scaffoldBackgroundColor: ColorApp.backgroundColor,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: ColorApp.backgroundColor,
+        elevation: 1,
+          backgroundColor: ColorApp.greyShade6,
           selectedItemColor: ColorApp.primaryColor,
           unselectedItemColor: ColorApp.greyShade3,
           type: BottomNavigationBarType.fixed),
