@@ -24,16 +24,6 @@ class SliderItem extends StatelessWidget {
             height: 220.h,
           ),
 
-           // CachedNetworkImage(
-           //        imageUrl: "${ApiConstant.imageBaseUrl}${results.backdropPath}",
-           //   width: double.infinity,
-           //   height: 220.h,
-           //   fit: BoxFit.fill,
-           //        placeholder: (context, url) => const Center(child: CircularProgressIndicator(
-           //          color: ColorApp.primaryColor,
-           //        )),
-           //        errorWidget: (context, url, error) => const Icon(Icons.error),
-           //     ),
 
 
           Positioned(
