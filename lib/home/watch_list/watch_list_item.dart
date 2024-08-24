@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
+import 'package:movie_app/firebase_utils.dart';
+import 'package:movie_app/model/movie.dart';
 
 
 class WatchListItem extends StatefulWidget {
-  const WatchListItem({super.key});
+  Movie movie;
+
+  WatchListItem({required this.movie});
 
   @override
   State<WatchListItem> createState() => _WatchListItemState();
@@ -33,7 +37,13 @@ class _WatchListItemState extends State<WatchListItem> {
                 ),
                 InkWell(
                   onTap: (){
-                    isWatchList =!isWatchList;
+                    // Update the locally
+                    isWatchList = !isWatchList;
+
+                    // Update in Firebase
+                    //FirebaseUtils.updateMovieIsWatchListInFireStore(widget.movie, widget.movie.id);
+
+                    // Update the UI
                     setState(() {
 
                     });
@@ -62,14 +72,14 @@ class _WatchListItemState extends State<WatchListItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Alita Battle Angel",
+                     widget.movie.title,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
                         .copyWith(fontSize: 20.sp),
                   ),
                   Text(
-                    "2019",
+                    widget.movie.dateTime as String,
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!

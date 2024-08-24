@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/home/watch_list/movie_list_provider.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
 import 'package:movie_app/responsive_ui/responsive_class.dart';
 import 'package:movie_app/theme/theme_app.dart';
+import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 import 'home/home.dart';
@@ -13,7 +15,13 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  // runApp(MyApp());
+  runApp(
+      ChangeNotifierProvider(
+          create: (context) => MovieListProvider(),
+          child: MyApp()
+      )
+  );
 
 }
 
