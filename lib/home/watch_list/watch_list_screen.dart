@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
+import 'package:movie_app/home/watch_list/movie_list_provider.dart';
 import 'package:movie_app/home/watch_list/watch_list_item.dart';
+import 'package:movie_app/model/movie.dart';
+import 'package:provider/provider.dart';
 
 class WatchListScreen extends StatelessWidget {
   const WatchListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var movieListProvider = Provider.of<MovieListProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -42,9 +46,9 @@ class WatchListScreen extends StatelessWidget {
                 );
               },
               itemBuilder: (context, index){
-                return WatchListItem();
+                return WatchListItem(movie: movieListProvider.moviesList[index]);
               },
-              itemCount: 10,
+              itemCount: movieListProvider.moviesList.length,
             ),
           ),
         ],
