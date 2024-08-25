@@ -30,11 +30,13 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
     setState(() {
       isBooked = prefs.getBool('${widget.resultsRecomended.id}') ?? false;
     });
+    print('Loaded isBooked for ${widget.resultsRecomended.id}: $isBooked');
   }
 
   void _saveIsBooked() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('${widget.resultsRecomended.id}', isBooked);
+    await prefs.setBool('${widget.resultsRecomended.id}', isBooked);
+    print('Saved isBooked for ${widget.resultsRecomended.id}: $isBooked');
   }
 
   @override
@@ -54,21 +56,21 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
               height: 200.h,
             ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 setState(() {
                   isBooked = !isBooked;
                 });
                 _saveIsBooked();
 
-                if (isBooked==true) {
-                  FirebaseUtils.addMovieToFireStore(Movie(
+                if (isBooked) {
+                  await FirebaseUtils.addMovieToFireStore(Movie(
                     id: widget.resultsRecomended.id.toString(),
                     title: widget.resultsRecomended.title ?? "",
                     imageUrl: widget.resultsRecomended.posterPath ?? "",
                     dateTime: DateTime.parse(widget.resultsRecomended.releaseDate ?? ""),
                   ));
                 } else {
-                  FirebaseUtils.deleteMovieFromFireStore(widget.resultsRecomended.id.toString());
+                  await FirebaseUtils.deleteMovieFromFireStore(widget.resultsRecomended.id.toString());
                 }
               },
               child: isBooked
@@ -91,7 +93,6 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                 height: 90.h,
                 padding: const EdgeInsets.all(7),
                 decoration: const BoxDecoration(
-                  boxShadow: [],
                   color: Color(0xff514F4F),
                   borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(5),
@@ -109,21 +110,20 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                           height: 15.h,
                           fit: BoxFit.fill,
                         ),
-                        SizedBox(
-                          width: 3.w,
-                        ),
+                        SizedBox(width: 3.w),
                         Text(
                           widget.resultsRecomended.voteAverage.toString(),
                           style: Theme.of(context).textTheme.titleMedium,
-                        )
+                        ),
                       ],
                     ),
                     Text(
                       widget.resultsRecomended.originalTitle!,
                       maxLines: 3,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          fontSize: 9.sp
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(fontSize: 9.sp),
                     ),
                     Text(
                       widget.resultsRecomended.releaseDate!,
@@ -135,7 +135,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
