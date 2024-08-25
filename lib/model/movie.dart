@@ -47,5 +47,4 @@ class Movie{
       "isWatchList" : isWatchList,
     };
   }
-
 }

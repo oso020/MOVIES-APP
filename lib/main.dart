@@ -20,9 +20,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseFirestore.instance.disableNetwork();
-
-  ///to run offline
+  // await FirebaseFirestore.instance.disableNetwork(); ///to run offline
   runApp(
       ChangeNotifierProvider(
           create: (context) => MovieListProvider(),
@@ -56,6 +54,8 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+
+
   }
 }
 
