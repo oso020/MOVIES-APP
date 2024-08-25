@@ -45,10 +45,14 @@ class _ShowImageState extends State<ShowImage> {
             context, MovieDetailsScreen.routeName,
             arguments: widget.results.id);
 
-        if (result != null && result == true) {
-          isBooked=false;
+        if ( result == true) {
+          isBooked=true;
+          print("osman2");
           setState(() {});
-        }
+        }else{
+          print("Osman");
+          isBooked=false;
+          setState(() {});}
       },
       child: Stack(
         children: [

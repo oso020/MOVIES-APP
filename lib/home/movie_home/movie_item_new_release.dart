@@ -47,10 +47,14 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
             context, MovieDetailsScreen.routeName,
             arguments: widget.resultsNewReleases.id);
 
-        if (result != null && result == true) {
-          isBooked=false;
+        if ( result == true) {
+          isBooked=true;
+          print("osman2");
           setState(() {});
-        }
+        }else{
+          print("Osman");
+          isBooked=false;
+          setState(() {});}
       },
       child: Stack(
         children: [

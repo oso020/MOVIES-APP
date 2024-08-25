@@ -57,6 +57,7 @@ class _MovieInfoWidgetState extends State<MovieInfoWidget> {
 
   void saveIsBooked() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    print(isBooked);
     prefs.setBool('${widget.id}', isBooked);
   }
 

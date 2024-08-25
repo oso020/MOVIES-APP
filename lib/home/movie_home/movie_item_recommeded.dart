@@ -48,7 +48,12 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
             context, MovieDetailsScreen.routeName,
             arguments: widget.resultsRecomended.id);
 
-        if (result != null && result == true) {
+        if ( result == true) {
+          isBooked=true;
+          print("osman2");
+          setState(() {});
+        }else{
+          print("Osman");
           isBooked=false;
           setState(() {});
         }
@@ -80,7 +85,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                   await FirebaseUtils.deleteMovieFromFireStore(widget.resultsRecomended.id.toString());
                 }
               },
-              child: isBooked
+              child: isBooked==true
                   ? Image.asset(
                 "assets/images/bookmark_saved.png",
                 width: 30.w,

@@ -6,6 +6,7 @@ import 'package:movie_app/movie_details/more_like_this_item.dart';
 import 'package:movie_app/movie_details/movie_details_screen_states.dart';
 import 'package:movie_app/movie_details/movie_details_screen_view_model.dart';
 import 'package:movie_app/movie_details/movie_info_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   static const String routeName = "movie_details_screen";
@@ -33,11 +34,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         backgroundColor: ColorApp.backgroundColor,
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          leading: IconButton(onPressed: (){
-            Navigator.pop(context,true);
-          }, icon: Icon(Icons.arrow_back,
-          color: ColorApp.whiteColor,
-          )),
+          leading: IconButton(
+              onPressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                var isBooked = prefs.getBool('${movieId}') ?? false;
+                Navigator.pop(context, isBooked);
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: ColorApp.whiteColor,
+              )),
           foregroundColor: ColorApp.whiteColor,
           title: BlocBuilder<MovieDetailsViewModel, MovieDetailsState>(
               bloc: viewModel,
