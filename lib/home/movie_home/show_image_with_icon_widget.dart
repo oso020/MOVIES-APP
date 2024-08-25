@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_app/firebase_utils.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
@@ -53,7 +54,9 @@ class _ShowImageState extends State<ShowImage> {
                   id: widget.results.id.toString(),
                     title: widget.results.originalTitle ?? "",
                     imageUrl: widget.results.posterPath ?? "",
-                    dateTime: widget.results.releaseDate));
+                  dateTime: DateTime.parse(widget.results.releaseDate ?? ""),
+                )
+                );
 
               },
               child: isBooked == true

@@ -25,11 +25,11 @@ class FirebaseUtils {
     return getMoviesCollection().doc(movie.id).delete();
   }
 
-// /// Function to update the `isWatchList` field of a movie.
-// static Future<void> updateMovieIsWatchListInFireStore(Movie movie) {
-//   var movieCollection = getMoviesCollection();   // Get collection
-//   return movieCollection.doc(movie.id).update({
-//     'isWatchList': movie.isWatchList,
-//   });
-// }
+/// Function to update the `isWatchList` field of a movie.
+static Future<void> updateMovieIsWatchListInFireStore(Movie movie) {
+  var movieCollection = getMoviesCollection();   // Get collection
+  return movieCollection.doc(movie.id).update({
+    'isWatchList': movie.isWatchList,
+  });
+}
 }

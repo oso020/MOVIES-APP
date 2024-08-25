@@ -1,14 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_app/component_widgets/network_image_custom.dart';
+import 'package:movie_app/firebase_utils.dart';
 import 'package:movie_app/model/NewReleases.dart';
+import 'package:movie_app/model/movie.dart';
 
 import '../../movie_details/movie_details_screen.dart';
 
 class MovieItemNewRelease extends StatefulWidget {
    final ResultsNewReleases  resultsNewReleases;
-   MovieItemNewRelease({super.key, required this.resultsNewReleases});
+   Movie movie;
+   MovieItemNewRelease({super.key, required this.resultsNewReleases, required this.movie});
 
   @override
   State<MovieItemNewRelease> createState() => _MovieItemNewReleaseState();
@@ -38,13 +42,25 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
 
           GestureDetector(
             onTap: (){
-              isBooked =!isBooked;
+              // isBooked =!isBooked;
+              widget.movie.isWatchList = !widget.movie.isWatchList;
+
+              FirebaseUtils.addMovieToFireStore(Movie(
+                  id: widget.resultsNewReleases.id.toString(),
+                  title: widget.resultsNewReleases.title ?? "",
+                  imageUrl: widget.resultsNewReleases.posterPath ?? "",
+                dateTime: DateTime.parse(widget.resultsNewReleases.releaseDate ?? "") ,
+              )
+              );
+              FirebaseUtils.updateMovieIsWatchListInFireStore(widget.movie);
+
               setState(() {
 
               });
             },
             child:
-          isBooked==true?
+            //isBooked==true ?
+            widget.movie.isWatchList == true ?
             Image.asset(
               "assets/images/bookmark_saved.png",
               width: 30.w,
