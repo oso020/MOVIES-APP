@@ -16,7 +16,7 @@ class NoMoviesFoundModel extends StatelessWidget {
         Text(
           'No Movies Found',
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                fontSize: 13,
+                fontSize: 13.sp,
                 color: ColorApp.greyShade4,
               ),
         ),

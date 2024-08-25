@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:movie_app/api_service/mohamed_ali/category_response.dart';
+import 'package:movie_app/model/category.dart';
 import 'package:movie_app/api_service/mohamed_ali/api_constant.dart';
-import 'package:movie_app/api_service/mohamed_ali/discover_response.dart';
-import 'package:movie_app/api_service/mohamed_ali/search_response.dart';
+import 'package:movie_app/model/discover.dart';
+import 'package:movie_app/model/search.dart';
 
 class ApiManger{
   //https://api.themoviedb.org/3/search/movie

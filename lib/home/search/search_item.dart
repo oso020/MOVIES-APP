@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/api_service/mohamed_ali/search_response.dart';
+import 'package:movie_app/component_widgets/network_image_custom.dart';
+import 'package:movie_app/model/search.dart';
 import 'package:movie_app/color/color_app.dart';
 
 import '../../movie_details/movie_details_screen.dart';
@@ -29,14 +30,12 @@ class SearchItem extends StatelessWidget {
                 ),
                 ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
+                    child:NetworkImageCustom(
                       width: 150.w,
                       height: 100.h,
-                      fit: BoxFit.fill,
-                      imageUrl:
-                          "https://image.tmdb.org/t/p/w500/${results.posterPath ?? ''}",
-                      errorWidget: (context, url, error) => Icon(Icons.error,color: ColorApp.primaryColor,),
-                    )),
+                      image: results.posterPath ?? "",
+                    )
+                ),
                 SizedBox(
                   width: 10.w,
                 ),
@@ -71,7 +70,7 @@ class SearchItem extends StatelessWidget {
           ),
         ),
         Divider(
-          height: 4,
+          height: 4.h,
         )
       ],
     );

@@ -1,74 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_app/api_service/mohamed_ali/api_manager.dart';
-import 'package:movie_app/api_service/mohamed_ali/discover_response.dart';
 import 'package:movie_app/color/color_app.dart';
 import 'package:movie_app/home/browse/category_discover_argument.dart';
+import 'package:movie_app/home/browse/discover/cubit/discover_state.dart';
+import 'package:movie_app/home/browse/discover/cubit/discover_view_model.dart';
 import 'package:movie_app/home/browse/discover/discover_item.dart';
 
-class DiscoverScreen extends StatelessWidget {
+import '../../model/category.dart';
+
+class DiscoverScreen extends StatefulWidget {
   static const String routeName = 'route_name';
+  Genres? genres;
+
+  DiscoverScreen({this.genres});
+
+  @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen> {
+  DiscoverViewModel viewModel = DiscoverViewModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    viewModel.getResults(widget.genres?.id.toString() ?? "");
+  }
 
   @override
   Widget build(BuildContext context) {
-    var args =
-        ModalRoute.of(context)!.settings.arguments as CategoryDiscoverArgument;
-    return SafeArea(
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Container(
-            padding: EdgeInsets.all(10),
-            margin: EdgeInsets.only(bottom: 10),
-            decoration: BoxDecoration(color: ColorApp.backgroundColor),
-            child: Text(
-              args.genres.name ?? '',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(fontSize: 30.sp, color: ColorApp.primaryColor),
-              textAlign: TextAlign.center,
-            )),
-        FutureBuilder<DiscoverResponse?>(
-          future: ApiManger.getDiscover(args.genres.id.toString()),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: ColorApp.primaryColor,
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Column(
-                children: [
-                  Text('Error loading the Movies'),
-                  ElevatedButton(
-                    onPressed: () {
-                      ApiManger.getDiscover(args.genres.id.toString());
-                    },
-                    child: (Text('try again')),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorApp.primaryColor),
-                  )
-                ],
-              );
-            }
-            var discoverList = snapshot.data!.results!;
-
-            return Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 10.h,
-                  crossAxisSpacing: 10.h,
-                ),
-                itemBuilder: (context, index) {
-                  return DiscoverItem(results: discoverList[index]);
-                },
-                itemCount: discoverList.length,
-              ),
-            );
-          },
+    var args = ModalRoute.of(context)!.settings.arguments as CategoryDiscoverArgument;
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorApp.backgroundColor ,
+        foregroundColor: ColorApp.whiteColor,
+        centerTitle: true,
+        title: Text(
+          args.genres.name ?? '',
+          style: Theme.of(context)
+              .textTheme
+              .titleSmall!
+              .copyWith(fontSize: 30.sp, color: ColorApp.primaryColor),
+          textAlign: TextAlign.center,
         ),
-      ]),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          BlocBuilder<DiscoverViewModel,DiscoverState>(
+            bloc: viewModel ,
+            builder: (context , state){
+              if(state is DiscoverLoadingSate){
+                return Expanded(
+                  child:  Center(
+                    child: CircularProgressIndicator(
+                      color: ColorApp.primaryColor,
+                    ),
+                  ),
+                );
+              }else if(state is DiscoverErrorSate){
+                return Column(
+                  children: [
+                    const Text('Error loading the Movies'),
+                    ElevatedButton(
+                      onPressed: () {
+                        viewModel.getResults(widget.genres?.id.toString() ?? "");
+                        setState(() {});
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorApp.primaryColor),
+                      child: (const Text('try again')),
+                    )
+                  ],
+                );
+              }else if(state is DiscoverSuccessSate){
+                return Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 10.h,
+                      crossAxisSpacing: 10.w,
+                    ),
+                    itemBuilder: (context, index) {
+                      return DiscoverItem(results: state.resultsList[index]);
+                    },
+                    itemCount: state.resultsList.length,
+                  ),
+                );
+              }
+              return Container();
+            },
+          )
+        ]),
+      ),
     );
   }
 }
