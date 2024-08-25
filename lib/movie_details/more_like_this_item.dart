@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../color/color_app.dart';
-import '../firebase_utils.dart';
-import '../model/movie.dart';
 
-class MoreLikeThisItem extends StatefulWidget {
+class MoreLikeThisItem extends StatelessWidget {
   int movieId;
   String title;
   String rate;
@@ -23,36 +20,11 @@ class MoreLikeThisItem extends StatefulWidget {
       required this.onMovieClicked});
 
   @override
-  State<MoreLikeThisItem> createState() => _MoreLikeThisItemState();
-}
-
-class _MoreLikeThisItemState extends State<MoreLikeThisItem> {
-  bool isBooked = false;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  void loadIsBooked() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isBooked = prefs.getBool('${widget.movieId}') ?? false;
-    });
-  }
-
-  void saveIsBooked() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('${widget.movieId}', isBooked);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         // print(movieId);
-        widget.onMovieClicked(widget.movieId);
+        onMovieClicked(movieId);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -83,7 +55,7 @@ class _MoreLikeThisItemState extends State<MoreLikeThisItem> {
                 child: Stack(
                   children: [
                     Image.network(
-                      "https://image.tmdb.org/t/p/w500/${widget.imagePath}",
+                      "https://image.tmdb.org/t/p/w500/$imagePath",
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.fill,
@@ -98,35 +70,9 @@ class _MoreLikeThisItemState extends State<MoreLikeThisItem> {
                     ),
                     InkWell(
                       onTap: () {
-                        isBooked = !isBooked;
-                        saveIsBooked();
-                        setState(() {});
-
-                        if (isBooked == true) {
-                          FirebaseUtils.addMovieToFireStore(Movie(
-                            id: widget.movieId.toString(),
-                            title: widget.title,
-                            imageUrl: widget.imagePath,
-                            dateTime: DateTime.parse(widget.runTime ?? ""),
-                          ));
-                        } else {
-                          FirebaseUtils.deleteMovieFromFireStore(
-                              widget.movieId.toString());
-                        }
+                        // Handle the bookmark action
                       },
-                      child: isBooked
-                          ? Image.asset(
-                              "assets/images/bookmark_saved.png",
-                              width: 30.w,
-                              height: 40.h,
-                              fit: BoxFit.fill,
-                            )
-                          : Image.asset(
-                              "assets/images/bookmark.png",
-                              width: 30.w,
-                              height: 40.h,
-                              fit: BoxFit.fill,
-                            ),
+                      child: Image.asset("assets/images/bookmark.png"),
                     ),
                   ],
                 ),
@@ -148,7 +94,7 @@ class _MoreLikeThisItemState extends State<MoreLikeThisItem> {
                           ),
                           SizedBox(width: 5.w),
                           Text(
-                            widget.rate,
+                            rate,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -162,7 +108,7 @@ class _MoreLikeThisItemState extends State<MoreLikeThisItem> {
                       ),
                       // Movie title
                       Text(
-                        widget.title,
+                        title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context)
@@ -172,7 +118,7 @@ class _MoreLikeThisItemState extends State<MoreLikeThisItem> {
                       ),
                       // Movie runtime
                       Text(
-                        widget.runTime,
+                        runTime,
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!

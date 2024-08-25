@@ -42,9 +42,9 @@ class MovieDetailsViewModel extends Cubit<MovieDetailsState> {
         return;
       }
 
-      List<SimilarMovie> similarMoviesList =
+      List<Movie> similarMoviesList =
           similarMoviesResponse.results!.map((data) {
-        return SimilarMovie(
+        return Movie(
           id: data.id ?? 0,
           title: data.title ?? "",
           posterPath: data.posterPath ?? "",

@@ -41,9 +41,16 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+      onTap: ()async {
+
+        final result = await Navigator.pushNamed(
+            context, MovieDetailsScreen.routeName,
             arguments: widget.resultsNewReleases.id);
+
+        if (result != null && result == true) {
+          isBooked=false;
+          setState(() {});
+        }
       },
       child: Stack(
         children: [

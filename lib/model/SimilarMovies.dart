@@ -1,11 +1,11 @@
-class SimilarMovie {
+class Movie {
   int id;
   String title;
   String posterPath;
   String releaseDate;
   double voteAverage;
 
-  SimilarMovie({
+  Movie({
     required this.id,
     required this.title,
     required this.voteAverage,

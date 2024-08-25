@@ -41,6 +41,7 @@ class ApiManager {
       throw e;
     }
   }
+
   static Future<SimilarMoviesResponse?> getSimilarMoviesById(
       int movieId) async {
     Uri url = Uri.http(

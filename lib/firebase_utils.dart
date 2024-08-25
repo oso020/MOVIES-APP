@@ -32,19 +32,4 @@ static Future<void> updateMovieIsWatchListInFireStore(Movie movie) {
     'isWatchList': movie.isWatchList,
   });
 }
-
-  static Future<bool> isMovieInWatchlist(int movieId) async {
-    try {
-      var watchlistCollection =
-          FirebaseFirestore.instance.collection('watchlist');
-
-      var querySnapshot =
-          await watchlistCollection.doc(movieId.toString()).get();
-
-      return querySnapshot.exists;
-    } catch (e) {
-      print("Error checking watchlist: $e");
-      return false;
-    }
-  }
 }
