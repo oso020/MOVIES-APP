@@ -24,6 +24,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     WidgetsBinding.instance.addPostFrameCallback((duration) {
       movieId = ModalRoute.of(context)!.settings.arguments as int;
       viewModel.fetchMovieDetails(movieId);
+      context.read<MovieDetailsViewModel>().fetchMovieDetails(movieId);
     });
   }
 
