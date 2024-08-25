@@ -6,16 +6,10 @@ import 'package:movie_app/model/movie.dart';
 
 class MovieListProvider extends ChangeNotifier{
   ///data
-  List<Movie> moviesList = [
-    Movie(title: "title", imageUrl: "imageUrl", dateTime: "12"),
-    Movie(title: "title", imageUrl: "imageUrl", dateTime: "12"),
-    Movie(title: "title", imageUrl: "imageUrl", dateTime: "12"),
-    Movie(title: "title", imageUrl: "imageUrl", dateTime: "12"),
-    Movie(title: "title", imageUrl: "imageUrl", dateTime: "12"),
-  ];
+  List<Movie> moviesList = [];
   DateTime selectDate = DateTime.now();
 
-  void getAllTasksFromFireStore(Movie movie) async{
+  void getAllMoviesFromFireStore() async{
 
     /// to get : collection => Documents => Data
     QuerySnapshot<Movie> querySnapshot = await FirebaseUtils.getMoviesCollection().get();
@@ -26,10 +20,10 @@ class MovieListProvider extends ChangeNotifier{
     }
     ).toList();
 
-    ///sorting movies
-    moviesList.sort((Movie movie1 , Movie movie2){
-     return movie1.dateTime.compareTo(movie2.dateTime);
-    });
+    // ///sorting movies
+    // moviesList.sort((Movie movie1 , Movie movie2){
+    //  return movie1.dateTime.compareTo(movie2.dateTime);
+    // });
 
    notifyListeners();
   }

@@ -6,6 +6,7 @@ import 'package:movie_app/color/color_app.dart';
 import 'package:movie_app/home/movie_home/cubit/new_releases/movie_home_states_NewReleases.dart';
 import 'package:movie_app/home/movie_home/cubit/popular/movie_home_view_model_popular.dart';
 import 'package:movie_app/home/movie_home/cubit/new_releases/movie_home_view_model_new_releases.dart';
+import 'package:movie_app/model/movie.dart';
 
 import 'cubit/popular/movie_home_states_popular.dart';
 import 'movie_item_new_release.dart';
@@ -45,6 +46,12 @@ class NewReleaseListViewAndText extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return MovieItemNewRelease(
                           resultsNewReleases: state.results![index],
+                          movie: Movie(
+                            id: state.results![index].id.toString(),
+                            title: state.results![index].title ?? "",
+                            imageUrl: state.results![index].posterPath ?? "",
+                            dateTime: DateTime.parse(state.results![index].releaseDate ?? ""),
+                          ),
                         );
                       },),
                   )

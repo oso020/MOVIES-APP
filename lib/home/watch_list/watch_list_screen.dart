@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
 import 'package:movie_app/home/watch_list/movie_list_provider.dart';
 import 'package:movie_app/home/watch_list/watch_list_item.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:provider/provider.dart';
 
 class WatchListScreen extends StatelessWidget {
@@ -12,6 +11,8 @@ class WatchListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var movieListProvider = Provider.of<MovieListProvider>(context);
+    movieListProvider.getAllMoviesFromFireStore();
+
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -22,7 +23,7 @@ class WatchListScreen extends StatelessWidget {
           ),
           Row(
             children: [
-              Icon(Icons.bookmark_add_outlined, color: ColorApp.primaryColor, size: 30,),
+              const Icon(Icons.bookmark_add_outlined, color: ColorApp.primaryColor, size: 30,),
               SizedBox(
                 width: 5.w,
               ),
@@ -41,7 +42,7 @@ class WatchListScreen extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) {
-                return Divider(
+                return const Divider(
                   height: 4,
                 );
               },
