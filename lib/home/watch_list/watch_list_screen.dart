@@ -11,7 +11,7 @@ class WatchListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var movieListProvider = Provider.of<MovieListProvider>(context);
-    movieListProvider.getAllMoviesFromFireStore();
+  movieListProvider.getAllMoviesFromFireStore();
 
     return Padding(
       padding: const EdgeInsets.all(15),

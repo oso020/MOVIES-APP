@@ -21,14 +21,23 @@ class _WatchListItemState extends State<WatchListItem> {
   bool isWatchList = true;
 
   @override
+  void dispose() {
+    // Perform any necessary cleanup here
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SizedBox(height: 20.h),
         InkWell(
           onTap: () {
-            Navigator.pushNamed(context, MovieDetailsScreen.routeName,
-                arguments: int.parse(widget.movie.id));
+            Navigator.pushNamed(
+              context,
+              MovieDetailsScreen.routeName,
+              arguments: int.parse(widget.movie.id),
+            );
           },
           child: Row(
             children: [
@@ -45,13 +54,15 @@ class _WatchListItemState extends State<WatchListItem> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await FirebaseUtils.deleteMovieFromFireStore(widget.movie.id);
-
+                      await FirebaseUtils.deleteMovieFromFireStore(
+                          widget.movie.id);
                       await updateSharedPrefs(widget.movie.id, false);
 
-                      setState(() {
-                        isWatchList = false;
-                      });
+                      if (mounted) {
+                        setState(() {
+                          isWatchList = false;
+                        });
+                      }
                     },
                     child: Image.asset(
                       "assets/images/bookmark_saved.png",
@@ -76,11 +87,10 @@ class _WatchListItemState extends State<WatchListItem> {
                     ),
                     SizedBox(height: 20.h),
                     Text(
-                      DateFormat.yMMMd().format(DateTime.parse(widget.movie.dateTime.toString())),
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontSize: 18.sp, color: ColorApp.greyShade4),
+                      DateFormat.yMMMd().format(
+                          DateTime.parse(widget.movie.dateTime.toString())),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontSize: 18.sp, color: ColorApp.greyShade4),
                     ),
                     SizedBox(height: 10.h),
                   ],
