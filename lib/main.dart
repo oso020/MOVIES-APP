@@ -19,7 +19,8 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await FirebaseFirestore.instance.disableNetwork(); //to run offline
+
+  // await FirebaseFirestore.instance.disableNetwork(); ///to run offline
   runApp(
       ChangeNotifierProvider(
           create: (context) => MovieListProvider(),
