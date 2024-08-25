@@ -1,4 +1,4 @@
-import '../../api_service/mohamed_ali/category_response.dart';
+import '../../model/category.dart';
 
 class CategoryDiscoverArgument{
   Genres genres;

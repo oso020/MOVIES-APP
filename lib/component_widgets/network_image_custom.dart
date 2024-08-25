@@ -28,7 +28,7 @@ class NetworkImageCustom extends StatelessWidget {
       )),
       errorWidget: (context, url, error) => Icon(
         Icons.error,
-        color: Colors.white,
+        color: ColorApp.primaryColor,
         size: 30.sp,
       ),
     );
