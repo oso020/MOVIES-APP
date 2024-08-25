@@ -21,8 +21,8 @@ class FirebaseUtils {
   }
 
   /// Function to delete a movie from Firestore.
-  static Future<void> deleteMovieFromFireStore(Movie movie) {
-    return getMoviesCollection().doc(movie.id).delete();
+  static Future<void> deleteMovieFromFireStore(String movieId) {
+    return getMoviesCollection().doc(movieId).delete();
   }
 
 /// Function to update the `isWatchList` field of a movie.

@@ -17,3 +17,8 @@ class MovieHomeErrorPopular  extends MovieHomeStatesPopular{
     required this.errorMessage
   });
 }
+
+
+class BookedSwitch  extends MovieHomeStatesPopular{
+
+}

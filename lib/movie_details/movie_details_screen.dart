@@ -32,6 +32,12 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     return Scaffold(
         backgroundColor: ColorApp.backgroundColor,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(onPressed: (){
+            Navigator.pop(context,true);
+          }, icon: Icon(Icons.arrow_back,
+          color: ColorApp.whiteColor,
+          )),
           foregroundColor: ColorApp.whiteColor,
           title: BlocBuilder<MovieDetailsViewModel, MovieDetailsState>(
               bloc: viewModel,
@@ -138,6 +144,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             ),
                             SizedBox(height: 16.h),
                             MovieInfoWidget(
+                              title: state.movieDetails.title ?? '',
+                              dateTime: state.movieDetails.releaseDate ?? '',
+                              id: state.movieId.toString(),
                               overview: state.movieDetails.overview ?? "",
                               rating: state.movieDetails.voteAverage
                                       ?.toInt()

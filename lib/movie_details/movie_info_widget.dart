@@ -1,28 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/firebase_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../color/color_app.dart';
+import '../model/movie.dart';
 import 'movie_type_container.dart';
 
-class MovieInfoWidget extends StatelessWidget {
+class MovieInfoWidget extends StatefulWidget {
   String overview;
   String rating;
   List<String> genres;
   String imagePath;
+  String id;
+  String title;
+  String?dateTime;
 
   MovieInfoWidget(
       {required this.overview,
       required this.rating,
       required this.genres,
-      required this.imagePath});
+      required this.imagePath,
+      required this.id,
+        required this.title,
+        required this.dateTime
+      });
 
+  @override
+  State<MovieInfoWidget> createState() => _MovieInfoWidgetState();
+}
+
+class _MovieInfoWidgetState extends State<MovieInfoWidget> {
   getGenresList() {
     List<MovieTypeContainer> genresList = [];
 
-    for (int i = 0; i < genres.length; i++) {
-      genresList.add(MovieTypeContainer(type: genres[i]));
+    for (int i = 0; i < widget.genres.length; i++) {
+      genresList.add(MovieTypeContainer(type: widget.genres[i]));
     }
     return genresList;
+  }
+
+  bool isBooked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadIsBooked();
+  }
+
+  void loadIsBooked() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isBooked = prefs.getBool('${widget.id}') ?? false;
+    });
+  }
+
+  void saveIsBooked() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('${widget.id}', isBooked);
   }
 
   @override
@@ -33,7 +68,7 @@ class MovieInfoWidget extends StatelessWidget {
         Stack(
           children: [
             Image.network(
-              "https://image.tmdb.org/t/p/w500/$imagePath",
+              "https://image.tmdb.org/t/p/w500/${widget.imagePath}",
               width: 129.w,
               height: 199.h,
               fit: BoxFit.fill,
@@ -48,8 +83,34 @@ class MovieInfoWidget extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                isBooked = !isBooked;
+                saveIsBooked();
+                setState(() {});
+
+                if (isBooked == true) {
+                  FirebaseUtils.addMovieToFireStore(Movie(
+                    id: widget.id.toString(),
+                    title: widget.title ,
+                    imageUrl: widget.imagePath ,
+                    dateTime: DateTime.parse(widget.dateTime ?? ""),
+                  ));
+                } else {
+                  FirebaseUtils.deleteMovieFromFireStore(widget.id);
+                }
               },
-              child: Image.asset("assets/images/bookmark.png"),
+              child: isBooked
+                  ? Image.asset(
+                "assets/images/bookmark_saved.png",
+                width: 30.w,
+                height: 40.h,
+                fit: BoxFit.fill,
+              )
+                  : Image.asset(
+                "assets/images/bookmark.png",
+                width: 30.w,
+                height: 40.h,
+                fit: BoxFit.fill,
+              ),
             ),
           ],
         ),
@@ -68,7 +129,7 @@ class MovieInfoWidget extends StatelessWidget {
               ),
               //movie description
               Text(
-                overview,
+                widget.overview,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 4,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
@@ -85,7 +146,7 @@ class MovieInfoWidget extends StatelessWidget {
                   Image.asset("assets/images/star.png"),
                   SizedBox(width: 15.w),
                   Text(
-                    rating,
+                    widget.rating,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           fontSize: 19,
                           color: Colors.white,

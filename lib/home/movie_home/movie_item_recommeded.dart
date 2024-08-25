@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:movie_app/color/color_app.dart';
 import 'package:movie_app/component_widgets/network_image_custom.dart';
-
+import '../../firebase_utils.dart';
 import '../../model/Recomended.dart';
+import '../../model/movie.dart';
 import '../../movie_details/movie_details_screen.dart';
 
 class MovieItemRecommeded extends StatefulWidget {
   final ResultsRecomended resultsRecomended;
-  const MovieItemRecommeded({super.key, required this.resultsRecomended});
+  MovieItemRecommeded({super.key, required this.resultsRecomended});
 
   @override
   State<MovieItemRecommeded> createState() => _MovieItemRecommededState();
@@ -16,12 +18,31 @@ class MovieItemRecommeded extends StatefulWidget {
 
 class _MovieItemRecommededState extends State<MovieItemRecommeded> {
   bool isBooked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadIsBooked();
+  }
+
+  void loadIsBooked() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isBooked = prefs.getBool('${widget.resultsRecomended.id}') ?? false;
+    });
+  }
+
+  void _saveIsBooked() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('${widget.resultsRecomended.id}', isBooked);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, MovieDetailsScreen.routeName,arguments: widget.resultsRecomended.id);
-
+      onTap: () {
+        Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+            arguments: widget.resultsRecomended.id);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
@@ -34,22 +55,35 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
             ),
             GestureDetector(
               onTap: () {
-                isBooked = !isBooked;
-                setState(() {});
+                setState(() {
+                  isBooked = !isBooked;
+                });
+                _saveIsBooked();
+
+                if (isBooked==true) {
+                  FirebaseUtils.addMovieToFireStore(Movie(
+                    id: widget.resultsRecomended.id.toString(),
+                    title: widget.resultsRecomended.title ?? "",
+                    imageUrl: widget.resultsRecomended.posterPath ?? "",
+                    dateTime: DateTime.parse(widget.resultsRecomended.releaseDate ?? ""),
+                  ));
+                } else {
+                  FirebaseUtils.deleteMovieFromFireStore(widget.resultsRecomended.id.toString());
+                }
               },
-              child: isBooked == true
+              child: isBooked
                   ? Image.asset(
-                      "assets/images/bookmark_saved.png",
-                      width: 30.w,
-                      height: 40.h,
-                      fit: BoxFit.fill,
-                    )
+                "assets/images/bookmark_saved.png",
+                width: 30.w,
+                height: 40.h,
+                fit: BoxFit.fill,
+              )
                   : Image.asset(
-                      "assets/images/bookmark.png",
-                      width: 30.w,
-                      height: 40.h,
-                      fit: BoxFit.fill,
-                    ),
+                "assets/images/bookmark.png",
+                width: 30.w,
+                height: 40.h,
+                fit: BoxFit.fill,
+              ),
             ),
             Positioned(
               top: 90.h,
@@ -88,15 +122,15 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                       widget.resultsRecomended.originalTitle!,
                       maxLines: 3,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontSize: 9.sp
+                          fontSize: 9.sp
                       ),
                     ),
                     Text(
                       widget.resultsRecomended.releaseDate!,
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                            fontSize: 9.sp,
-                            color: ColorApp.greyShade2,
-                          ),
+                        fontSize: 9.sp,
+                        color: ColorApp.greyShade2,
+                      ),
                     ),
                   ],
                 ),

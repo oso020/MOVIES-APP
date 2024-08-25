@@ -4,11 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/color/color_app.dart';
 import 'package:movie_app/home/movie_home/cubit/new_releases/movie_home_states_NewReleases.dart';
-import 'package:movie_app/home/movie_home/cubit/popular/movie_home_view_model_popular.dart';
 import 'package:movie_app/home/movie_home/cubit/new_releases/movie_home_view_model_new_releases.dart';
 import 'package:movie_app/model/movie.dart';
 
-import 'cubit/popular/movie_home_states_popular.dart';
 import 'movie_item_new_release.dart';
 
 class NewReleaseListViewAndText extends StatelessWidget {
