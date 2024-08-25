@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:movie_app/firebase_utils.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/movie_details/movie_details_screen.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../component_widgets/network_image_custom.dart';
 import '../../model/Popular.dart';
 
@@ -18,12 +17,38 @@ class ShowImage extends StatefulWidget {
 
 class _ShowImageState extends State<ShowImage> {
   bool isBooked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBookmarkStatus();
+  }
+
+  Future<void> _loadBookmarkStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final bookmarkStatus = prefs.getBool('${widget.results.id}');
+    setState(() {
+      isBooked = bookmarkStatus ?? false;
+    });
+  }
+
+  Future<void> _updateSharedPrefs(String movieId, bool isBooked) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('$movieId', isBooked);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+      onTap: () async {
+        final result = await Navigator.pushNamed(
+            context, MovieDetailsScreen.routeName,
             arguments: widget.results.id);
+
+        if (result != null && result == true) {
+          isBooked=false;
+          setState(() {});
+        }
       },
       child: Stack(
         children: [
@@ -34,32 +59,33 @@ class _ShowImageState extends State<ShowImage> {
               width: 120.w,
               height: 180.h,
             ),
-
-            // CachedNetworkImage(
-            //   imageUrl: "${ApiConstant.imageBaseUrl}${widget.results.posterPath}",
-            //   width: 120.w,
-            //   height: 180.h,
-            //   fit: BoxFit.fill,
-            //   placeholder: (context, url) => Center(child: CircularProgressIndicator(
-            //     color: ColorApp.primaryColor,
-            //   )),
-            //   errorWidget: (context, url, error) => Icon(Icons.error),
-            // ),
           ),
           Positioned(
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
+                setState(() {
+                  isBooked = !isBooked;
+                });
 
-                FirebaseUtils.addMovieToFireStore(Movie(
-                  id: widget.results.id.toString(),
+                if (isBooked) {
+                  // Add to Firestore
+                  await FirebaseUtils.addMovieToFireStore(Movie(
+                    id: widget.results.id.toString(),
                     title: widget.results.originalTitle ?? "",
                     imageUrl: widget.results.posterPath ?? "",
-                  dateTime: DateTime.parse(widget.results.releaseDate ?? ""),
-                )
-                );
+                    dateTime: DateTime.parse(widget.results.releaseDate ?? ""),
+                  ));
+                } else {
+                  // Remove from Firestore
+                  await FirebaseUtils.deleteMovieFromFireStore(
+                      widget.results.id.toString());
+                }
 
+                // Update SharedPreferences
+                await _updateSharedPrefs(
+                    widget.results.id.toString(), isBooked);
               },
-              child: isBooked == true
+              child: isBooked
                   ? Image.asset(
                       "assets/images/bookmark_saved.png",
                       width: 30.w,
@@ -73,7 +99,7 @@ class _ShowImageState extends State<ShowImage> {
                       fit: BoxFit.fill,
                     ),
             ),
-          )
+          ),
         ],
       ),
     );

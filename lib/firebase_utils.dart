@@ -21,8 +21,8 @@ class FirebaseUtils {
   }
 
   /// Function to delete a movie from Firestore.
-  static Future<void> deleteMovieFromFireStore(Movie movie) {
-    return getMoviesCollection().doc(movie.id).delete();
+  static Future<void> deleteMovieFromFireStore(String movieId) {
+    return getMoviesCollection().doc(movieId).delete();
   }
 
 /// Function to update the `isWatchList` field of a movie.
@@ -32,4 +32,19 @@ static Future<void> updateMovieIsWatchListInFireStore(Movie movie) {
     'isWatchList': movie.isWatchList,
   });
 }
+
+  static Future<bool> isMovieInWatchlist(int movieId) async {
+    try {
+      var watchlistCollection =
+          FirebaseFirestore.instance.collection('watchlist');
+
+      var querySnapshot =
+          await watchlistCollection.doc(movieId.toString()).get();
+
+      return querySnapshot.exists;
+    } catch (e) {
+      print("Error checking watchlist: $e");
+      return false;
+    }
+  }
 }
