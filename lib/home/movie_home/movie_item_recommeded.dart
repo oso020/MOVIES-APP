@@ -42,9 +42,16 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, MovieDetailsScreen.routeName,
+      onTap: () async{
+
+        final result = await Navigator.pushNamed(
+            context, MovieDetailsScreen.routeName,
             arguments: widget.resultsRecomended.id);
+
+        if (result != null && result == true) {
+          isBooked=false;
+          setState(() {});
+        }
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
