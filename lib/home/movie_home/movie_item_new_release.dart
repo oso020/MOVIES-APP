@@ -33,9 +33,14 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
     });
   }
 
-  void saveIsBooked() async {
+  /*void saveIsBooked() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('${widget.resultsNewReleases.id}', isBooked);
+  }*/
+
+  Future<void> _updateSharedPrefs(String movieId, bool isBooked) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('$movieId', isBooked);
   }
 
   @override
@@ -67,21 +72,22 @@ class _MovieItemNewReleaseState extends State<MovieItemNewRelease> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              isBooked = !isBooked;
-              saveIsBooked();
-              setState(() {});
+            onTap: () async{
+              setState(() {
+                isBooked = !isBooked;
+              });
 
               if (isBooked == true) {
-                FirebaseUtils.addMovieToFireStore(Movie(
+                await FirebaseUtils.addMovieToFireStore(Movie(
                   id: widget.resultsNewReleases.id.toString(),
                   title: widget.resultsNewReleases.title ?? "",
                   imageUrl: widget.resultsNewReleases.posterPath ?? "",
                   dateTime: DateTime.parse(widget.resultsNewReleases.releaseDate ?? ""),
                 ));
               } else {
-                FirebaseUtils.deleteMovieFromFireStore(widget.movie.id);
+               await FirebaseUtils.deleteMovieFromFireStore(widget.movie.id);
               }
+            await  _updateSharedPrefs(widget.movie.id, isBooked);
             },
             child: isBooked == true
                 ? Image.asset(

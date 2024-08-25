@@ -33,10 +33,15 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
     print('Loaded isBooked for ${widget.resultsRecomended.id}: $isBooked');
   }
 
-  void _saveIsBooked() async {
+/*  void _saveIsBooked() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('${widget.resultsRecomended.id}', isBooked);
     print('Saved isBooked for ${widget.resultsRecomended.id}: $isBooked');
+  }*/
+
+  Future<void> _updateSharedPrefs(String movieId, bool isBooked) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('$movieId', isBooked);
   }
 
   @override
@@ -72,7 +77,7 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                 setState(() {
                   isBooked = !isBooked;
                 });
-                _saveIsBooked();
+
 
                 if (isBooked) {
                   await FirebaseUtils.addMovieToFireStore(Movie(
@@ -84,6 +89,9 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
                 } else {
                   await FirebaseUtils.deleteMovieFromFireStore(widget.resultsRecomended.id.toString());
                 }
+
+                await _updateSharedPrefs(widget.resultsRecomended.id.toString(), isBooked);
+
               },
               child: isBooked==true
                   ? Image.asset(

@@ -19,6 +19,7 @@ class WatchListItem extends StatefulWidget {
 
 class _WatchListItemState extends State<WatchListItem> {
   bool isWatchList = true;
+  bool isNetworkEnabled = true; // Assume this flag determines if the network is enabled
 
   @override
   void dispose() {
@@ -54,15 +55,18 @@ class _WatchListItemState extends State<WatchListItem> {
                   ),
                   InkWell(
                     onTap: () async {
-                      await FirebaseUtils.deleteMovieFromFireStore(
-                          widget.movie.id);
+                      if (isNetworkEnabled) {
+                        await FirebaseUtils.deleteMovieFromFireStore(
+                            widget.movie.id);
+                      }
+
                       await updateSharedPrefs(widget.movie.id, false);
 
-                      if (mounted) {
-                        setState(() {
-                          isWatchList = false;
-                        });
-                      }
+                      setState(() {
+                        isWatchList = false;
+                      });
+
+
                     },
                     child: Image.asset(
                       "assets/images/bookmark_saved.png",
@@ -108,6 +112,7 @@ class _WatchListItemState extends State<WatchListItem> {
 
   Future<void> updateSharedPrefs(String movieId, bool value) async {
     final prefs = await SharedPreferences.getInstance();
+    print(value);
     await prefs.setBool('$movieId', value);
   }
 }
