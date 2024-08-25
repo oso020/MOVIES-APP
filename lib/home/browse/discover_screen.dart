@@ -22,23 +22,19 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   DiscoverViewModel viewModel = DiscoverViewModel();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    viewModel.getResults(widget.genres?.id.toString() ?? "");
-  }
 
   @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)!.settings.arguments as CategoryDiscoverArgument;
+    var args = ModalRoute.of(context)!.settings.arguments as int;
+    viewModel.getResults(args.toString() ?? "");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorApp.backgroundColor ,
         foregroundColor: ColorApp.whiteColor,
         centerTitle: true,
         title: Text(
-          args.genres.name ?? '',
+           widget.genres?.name ?? '',
           style: Theme.of(context)
               .textTheme
               .titleSmall!

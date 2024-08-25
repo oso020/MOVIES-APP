@@ -14,7 +14,7 @@ class CategoryItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(DiscoverScreen.routeName,
-            arguments: CategoryDiscoverArgument(genres: genres));
+            arguments: genres.id);
       },
       child: Stack(
         alignment: Alignment.center,
