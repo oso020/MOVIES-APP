@@ -7,7 +7,6 @@ import 'package:movie_app/home/watch_list/movie_list_provider.dart';
 import 'package:movie_app/home/browse/discover_screen.dart';
 
 import 'package:movie_app/movie_details/movie_details_screen.dart';
-import 'package:movie_app/responsive_ui/responsive_class.dart';
 import 'package:movie_app/theme/theme_app.dart';
 import 'package:provider/provider.dart';
 
