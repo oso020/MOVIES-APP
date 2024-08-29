@@ -23,7 +23,6 @@ class _WatchListItemState extends State<WatchListItem> {
 
   @override
   void dispose() {
-    // Perform any necessary cleanup here
     super.dispose();
   }
 
@@ -62,9 +61,6 @@ class _WatchListItemState extends State<WatchListItem> {
 
                       await updateSharedPrefs(widget.movie.id, false);
 
-                      setState(() {
-                        isWatchList = false;
-                      });
 
 
                     },
@@ -112,7 +108,6 @@ class _WatchListItemState extends State<WatchListItem> {
 
   Future<void> updateSharedPrefs(String movieId, bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    print(value);
     await prefs.setBool('$movieId', value);
   }
 }

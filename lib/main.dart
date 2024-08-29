@@ -20,11 +20,11 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseFirestore.instance.disableNetwork(); ///to run offline
+  // await FirebaseFirestore.instance.disableNetwork(); ///to run offline
   runApp(
       ChangeNotifierProvider(
           create: (context) => MovieListProvider(),
-          child: MyApp()
+          child: const MyApp()
       )
   );
 
@@ -35,10 +35,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width=ResponsiveClass.width(context);
-    var height=ResponsiveClass.height(context);
+
     return ScreenUtilInit(
-      designSize:  Size(width, height),
+      designSize:  const Size(412, 892),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -47,7 +46,7 @@ class MyApp extends StatelessWidget {
           initialRoute: HomeScreen.routeName,
           theme: ThemeApp.theme,
           routes: {
-            HomeScreen.routeName :(context)=> HomeScreen(),
+            HomeScreen.routeName :(context)=> const HomeScreen(),
             MovieDetailsScreen.routeName: (context) => MovieDetailsScreen(),
             DiscoverScreen.routeName: (context) => DiscoverScreen()
           },

@@ -30,7 +30,6 @@ class _MovieItemRecommededState extends State<MovieItemRecommeded> {
     setState(() {
       isBooked = prefs.getBool('${widget.resultsRecomended.id}') ?? false;
     });
-    print('Loaded isBooked for ${widget.resultsRecomended.id}: $isBooked');
   }
 
 /*  void _saveIsBooked() async {
