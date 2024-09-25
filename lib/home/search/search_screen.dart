@@ -29,56 +29,56 @@ class _SearchScreenState extends State<SearchScreen> {
       padding: const EdgeInsets.all(8.0),
       child: BlocProvider(
         create: (context) => viewModel..getSearch(viewModel.searchText),
-        child: Expanded(
-          child: Column(
-            children: [
-              TextFieldWidget(),
-              BlocBuilder<SearchViewModel, SearchState>(
-                  builder: (context, state) {
-                if (viewModel.searchText == '') {
-                  return NoMoviesFoundModel();
-                }
-                if (state is SearchLoadingState) {
-                  return Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        color: ColorApp.primaryColor,
-                      ),
+        child: Column(
+          children: [
+            TextFieldWidget(),
+            BlocBuilder<SearchViewModel, SearchState>(
+                builder: (context, state) {
+              if (viewModel.searchText == '') {
+                return NoMoviesFoundModel();
+              }
+              if (state is SearchLoadingState) {
+                return Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: ColorApp.primaryColor,
                     ),
-                  );
-                } else if (state is SearchErrorState) {
-                  return Column(
-                    children: [
-                      Text(
-                        'Error loading movies',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            viewModel.getSearch(viewModel.searchText);
-                          },
-                          child: Text('Try again'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: ColorApp.primaryColor,
-                          ))
-                    ],
-                  );
-                } else if (state is SearchSuccessState) {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemBuilder: (context, index) {
-                        return SearchItem(results: state.resultsList[index]);
-                      },
-                      itemCount: state.resultsList.length,
-                    ),
-                  );
-                }
-                return Container(
-                  color: Colors.red,
+                  ),
                 );
-              })
-            ],
-          ),
+              } else if (state is SearchErrorState) {
+                return Column(
+                  children: [
+                    Text(
+                      'Error loading movies',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          viewModel.getSearch(viewModel.searchText);
+                        },
+                        child: Text('Try again'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorApp.primaryColor,
+                        ))
+                  ],
+                );
+              } else if (state is SearchSuccessState) {
+                return Expanded(
+                  flex: 1,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return SearchItem(results: state.resultsList[index]);
+                    },
+                    itemCount: state.resultsList.length,
+                  ),
+                );
+              }
+              return Container(
+                color: Colors.red,
+              );
+            })
+          ],
         ),
       ),
     );
