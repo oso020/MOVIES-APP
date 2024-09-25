@@ -85,7 +85,7 @@ This project was developed as a team effort, with contributions from:
 - *Mohamed Ali*: handel search screen with api integration and browse screen and browse detailes  .
 
 - *Maram Hassan*: handel movie detailes screen with api integration , added bookmark and added to local storege.
-- 
+
 - *Zaid ElShal*: handel watchlist screen with firestore offline , delete from watchlist .
 
 ## License
