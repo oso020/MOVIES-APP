@@ -80,11 +80,13 @@ This *Movies Application* is a Flutter app designed to help users discover and m
 
 This project was developed as a team effort, with contributions from:
 
-- *Nader Emad*: Handled the integration of the TMDB API, built the search screen, managed movie details, and implemented the watchlist and bookmark features.
+- *Mohamed Osman*: handle home screen with api intergration , added bookmark and added to local storege  .
   
-- *Abdelrahman Sallamy*: Implemented Browse, also worked on optimizing the app’s performance, fixing bugs, and adding new features.
+- *Mohamed Ali*: handel search screen with api integration and browse screen and browse detailes  .
 
-- *Rofida Ahmed*: Worked on Home tab,also handeld some exceptions and API in Home tab.
+- *Maram Hassan*: handel movie detailes screen with api integration , added bookmark and added to local storege.
+- 
+- *Zaid ElShal*: handel watchlist screen with firestore offline , delete from watchlist .
 
 ## License
 
