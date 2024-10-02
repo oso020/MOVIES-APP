@@ -65,14 +65,20 @@ This *Movies Application* is a Flutter app designed to help users discover and m
 ## Screenshots
 
 <p align="center">
+  <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/splash.png" alt="Movie" width="220" style="margin: 10px;"/>
   <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/home%20screen.png" alt="Movie" width="220" style="margin: 10px;"/>
   <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/movie%20detailes.jpeg" alt="Movie" width="220" style="margin: 10px;"/>
-  <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/search%20page.png" alt="Movie" width="220" style="margin: 10px;"/>
 </p>
 
 <p align="center">
+     <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/search%20page.png" alt="Movie" width="220" style="margin: 10px;"/>
+
   <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/browse%20screen.png" alt="Movie" width="220" style="margin: 10px;"/>
   <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/choosen%20page%20in%20browse.png" alt="Movie" width="220" style="margin: 10px;"/>
+</p>
+
+<p align="center">
+  
   <img src="https://github.com/oso020/MOVIES-APP/blob/develop/screen_shots/watch%20list.png" alt="Movie" width="220" style="margin: 10px;"/>
 </p>
 
